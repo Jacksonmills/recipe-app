@@ -5,8 +5,9 @@ import { PanelLeft } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { VariantProps } from "class-variance-authority";
 
 export const SIDEBAR_STATE_COOKIE = "sidebar:state"
 
@@ -54,7 +55,7 @@ const SidebarLayout = React.forwardRef<
           } as React.CSSProperties
         }
         className={cn(
-          "flex min-h-screen bg-accent/50 pl-0 transition-all duration-300 ease-in-out data-[sidebar=closed]:pl-0 sm:pl-[--sidebar-width]",
+          "flex min-h-screen  pl-0 transition-all duration-300 ease-in-out data-[sidebar=closed]:pl-0 sm:pl-[--sidebar-width]",
           className
         )}
         {...props}
@@ -66,14 +67,16 @@ SidebarLayout.displayName = "SidebarLayout"
 
 const SidebarTrigger = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<"button">
->(({ className, ...props }, ref) => {
+  React.ComponentProps<"button"> & {
+    variant?: VariantProps<typeof buttonVariants>["variant"]
+  }
+>(({ className, variant, ...props }, ref) => {
   const { open, onOpenChange } = useSidebar()
 
   return (
     <Button
       ref={ref}
-      variant="ghost"
+      variant={variant || "ghost"}
       size="icon"
       className={cn("h-8 w-8", className)}
       onClick={() => onOpenChange(!open)}
@@ -129,7 +132,7 @@ const SidebarHeader = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("flex items-center border-b px-2.5 py-2", className)}
+      className={cn("flex items-center border-b p-2.5", className)}
       {...props}
     />
   )
@@ -143,7 +146,7 @@ const SidebarFooter = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("flex items-center border-t px-2.5 py-2", className)}
+      className={cn("flex items-center border-t p-2.5", className)}
       {...props}
     />
   )

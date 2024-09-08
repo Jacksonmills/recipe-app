@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarLayout } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { ClientSidebarTrigger } from "@/components/client-sidebar-trigger";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,17 +30,20 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark bg-accent`}
       >
         <SidebarLayout
           defaultOpen={cookies().get("sidebar:state")?.value === "true"}
         >
           <AppSidebar />
-          <main className="flex flex-1 flex-col p-2 transition-all duration-300 ease-in-out">
-            <div className="h-full rounded-md border-2 border-dashed p-2 flex gap-2 items-start">
-              <SidebarTrigger className="my-[2px]" />
-              <div className="w-full">
+          <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out">
+            <div className="h-full p-2 relative">
+              <div className="size-full relative">
                 {children}
+              </div>
+              
+              <div className="absolute top-4 left-4">
+                <ClientSidebarTrigger />
               </div>
             </div>
           </main>

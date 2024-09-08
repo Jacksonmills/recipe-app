@@ -11,7 +11,9 @@ import { NavMain } from "@/components/nav-main"
 import {
   Sidebar,
   SidebarContent,
+  SidebarHeader,
   SidebarItem,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 const data = {
   navMain: [
@@ -53,7 +55,10 @@ const data = {
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="pt-0">
+        <SidebarHeader>
+          <SidebarTrigger className="m-2" />
+        </SidebarHeader>
         <SidebarItem>
           <NavMain items={data.navMain} />
         </SidebarItem>
