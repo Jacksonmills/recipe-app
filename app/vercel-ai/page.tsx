@@ -30,7 +30,7 @@ export default function VercelAiPage() {
         placeholder="Enter a prompt..."
       />
       {isLoading && <Loading />}
-      <RecipeCard recipe={object as never} />
+      <RecipeCard recipe={object} />
     </div>
   )
 }

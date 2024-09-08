@@ -5,8 +5,8 @@ import { experimental_useObject as useObject } from "ai/react";
 import { Input } from "@/components/ui/input";
 import { RecipeCard } from "@/components/recipe-card";
 
-import { Loading } from "@/components/loading";
 import { RecipeSchema } from "@/lib/recipe-schema";
+import { Loader } from "lucide-react";
 
 export default function VercelAiPage() {
   const [prompt, setPrompt] = useState("A succulent orange chicken.");
@@ -15,24 +15,26 @@ export default function VercelAiPage() {
     api: "/vercel-ai-streaming/api",
   });
 
-  console.log(object)
-
   return (
     <div className="flex flex-col gap-4">
-      <Input
-        value={prompt}
-        disabled={isLoading}
-        onChange={(e) => setPrompt(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            submit({ prompt });
-            setPrompt("");
-          }
-        }}
-        placeholder="What recipe do you want?"
-      />
-      {isLoading && <Loading />}
-      {object && <RecipeCard recipe={object as never} />}
+      <div className="relative">
+        <Input
+          value={prompt}
+          disabled={isLoading}
+          onChange={(e) => setPrompt(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              submit({ prompt });
+              setPrompt("");
+            }
+          }}
+          placeholder="What recipe do you want?"
+        />
+        <div className="absolute right-2 top-1/2 -translate-y-1/2" >
+          {isLoading && <Loader className="animate-spin-slow" />}
+        </div>
+      </div>
+      <RecipeCard recipe={object} />
     </div>
   );
 }

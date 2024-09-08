@@ -36,9 +36,11 @@ export default async function RootLayout({
         >
           <AppSidebar />
           <main className="flex flex-1 flex-col p-2 transition-all duration-300 ease-in-out">
-            <div className="h-full rounded-md border-2 border-dashed p-2">
-              <SidebarTrigger />
-              {children}
+            <div className="h-full rounded-md border-2 border-dashed p-2 flex gap-2 items-start">
+              <SidebarTrigger className="my-[2px]" />
+              <div className="w-full">
+                {children}
+              </div>
             </div>
           </main>
         </SidebarLayout>

@@ -3,11 +3,13 @@ import Markdown from "react-markdown";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { RecipeSchema } from "@/lib/recipe-schema";
+import { DeepPartial } from "ai";
 
-export function RecipeCard({ recipe }: { recipe?: z.infer<typeof RecipeSchema> }) {
+export function RecipeCard({ recipe }: { recipe?: DeepPartial<z.infer<typeof RecipeSchema>> }) {
   if (!recipe) return null;
+  
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full mx-auto">
       <CardHeader>
       <CardTitle className="text-2xl font-bold">{recipe.name}</CardTitle>
       </CardHeader>
@@ -16,11 +18,15 @@ export function RecipeCard({ recipe }: { recipe?: z.infer<typeof RecipeSchema> }
           <div>
             <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
             <ul className="list-disc list-inside space-y-1">
-              {recipe.ingredients.map((ingredient, index) => (
-                <li key={`${ingredient.ingredient}-${index}`}>
-                  {ingredient.quantity} {ingredient.ingredient}
-                </li>
-              ))}
+              {recipe.ingredients.map((ingredient, index) => {
+                if (!ingredient) return null;
+
+                return (
+                  <li key={`${ingredient.ingredient}-${index}`}>
+                    {ingredient.quantity} {ingredient.ingredient}
+                  </li>
+                )
+              })}
             </ul>
           </div>
         )}
