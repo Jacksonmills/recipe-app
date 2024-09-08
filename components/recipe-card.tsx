@@ -16,8 +16,8 @@ export function RecipeCard({ recipe }: { recipe?: z.infer<typeof RecipeSchema> }
           <div>
             <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
             <ul className="list-disc list-inside space-y-1">
-              {recipe.ingredients.map((ingredient) => (
-                <li key={ingredient.ingredient}>
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={`${ingredient.ingredient}-${index}`}>
                   {ingredient.quantity} {ingredient.ingredient}
                 </li>
               ))}
@@ -28,8 +28,8 @@ export function RecipeCard({ recipe }: { recipe?: z.infer<typeof RecipeSchema> }
           <div>
             <h3 className="text-lg font-semibold mb-2">Steps</h3>
             <ol className="list-inside space-y-2">
-              {recipe.steps.map((step) => (
-                <li key={step}>
+              {recipe.steps.map((step, index) => (
+                <li key={`${step}-${index}`}>
                   <Markdown>{step}</Markdown>
                 </li>
               ))}

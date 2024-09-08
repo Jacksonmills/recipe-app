@@ -13,12 +13,9 @@ export default function VercelAiPage() {
   const { object, submit, isLoading } = useObject({
     schema: RecipeSchema,
     api: "/vercel-ai-streaming/api",
-    initialValue: {
-      name: "",
-      ingredients: [],
-      steps: [],
-    },
   });
+
+  console.log(object)
 
   return (
     <div className="flex flex-col gap-4">
@@ -35,7 +32,7 @@ export default function VercelAiPage() {
         placeholder="What recipe do you want?"
       />
       {isLoading && <Loading />}
-      <RecipeCard recipe={object as never} />
+      {object && <RecipeCard recipe={object as never} />}
     </div>
   );
 }
