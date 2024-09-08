@@ -15,6 +15,7 @@ import {
   SidebarItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import Image from "next/image";
 const data = {
   navMain: [
     {
@@ -57,7 +58,17 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent className="pt-0">
         <SidebarHeader>
-          <SidebarTrigger className="m-2" />
+          <SidebarTrigger className="m-2.5" />
+          <h2 className="ml-auto mr-2.5 flex items-center font-bold text-xl">
+            <Image
+              width={32}
+              height={32}
+              src="/favicon.ico"
+              alt="Vercel Logo"
+              className="w-8 h-8 mr-2.5"
+            />
+            Vercel AI
+          </h2>
         </SidebarHeader>
         <SidebarItem>
           <NavMain items={data.navMain} />

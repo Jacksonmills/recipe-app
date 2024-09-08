@@ -9,7 +9,7 @@ export function RecipeCard({ recipe }: { recipe?: DeepPartial<z.infer<typeof Rec
   if (!recipe) return null;
   
   return (
-    <Card className="w-full mx-auto">
+    <Card className="w-full mx-auto max-w-7xl">
       <CardHeader>
       <CardTitle className="text-2xl font-bold">{recipe.name}</CardTitle>
       </CardHeader>
