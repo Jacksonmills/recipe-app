@@ -128,10 +128,10 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
             className="w-[260px] p-0 md:w-[--sidebar-width] [&>button]:hidden"
             side="left"
           >
-            <SheetTitle>
+            <SheetTitle className="sr-only">
               Website sidebar
             </SheetTitle>
-            <SheetDescription>
+            <SheetDescription className="sr-only">
               This is the sidebar of the website.
             </SheetDescription>
             {sidebar}
