@@ -16,6 +16,13 @@ const schema = z.object({
   testNullable: z.coerce.number().nullable(),
 });
 
+const defaultValues = {
+  id: 'abcdef',
+  groupId: 'remove-coupon',
+  testOptional: '',
+  testNullable: null,
+};
+
 const RemoveCouponForm = () => {
   const handleSubmit = (data: z.infer<typeof schema>) => {
     console.log('Form Data:', data);
@@ -27,7 +34,7 @@ const RemoveCouponForm = () => {
         <h2>Remove Coupon</h2>
       </CardHeader>
       <CardContent>
-        <Form schema={schema} onSubmit={handleSubmit} className='grid gap-4'>
+        <Form schema={schema} onSubmit={handleSubmit} defaultValues={defaultValues} className='grid gap-4'>
           <InputField name="id" label="ID" />
           <InputField name="groupId" label="Group ID" disabled />
           <InputField name="testOptional" label="Test Optional" />

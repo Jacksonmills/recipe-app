@@ -10,11 +10,16 @@ import { SubmitButton } from "../form/submit-button";
 import { FormGroup } from "../ui/form";
 
 const schema = z.object({
-  code: z.string().min(4).max(8).default('Hello from zod'),
-  agreement: z.boolean().default(false).refine((val) => val === true, {
+  code: z.string().min(4).max(8),
+  agreement: z.boolean().refine((val) => val === true, {
     message: "Please read and accept the terms and conditions",
   })
 })
+
+const defaultValues = {
+  code: 'Hello from zod',
+  agreement: false
+}
 
 const ApplyCouponForm = () => {
   const onSubmit = async (data: z.infer<typeof schema>) => {
@@ -31,7 +36,7 @@ const ApplyCouponForm = () => {
         <h2>Apply Coupon</h2>
       </CardHeader>
       <CardFooter>
-        <Form onSubmit={onSubmit} schema={schema}>
+        <Form onSubmit={onSubmit} schema={schema} defaultValues={defaultValues}>
           <div className="grid gap-4">
             <FormGroup name="apply coupon code form group" className="grid gap-4">
               <InputField name="code" label="Coupon Code" placeholder="Enter your coupon code" />
