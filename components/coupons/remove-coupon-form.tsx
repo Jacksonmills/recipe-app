@@ -5,7 +5,8 @@ import { z } from 'zod';
 import Form from '../form/form';
 import InputField from '../form/input-field';
 import { Card, CardContent, CardHeader } from '../ui/card';
-import { Button } from '../ui/button';
+import CheckboxField from '../form/checkbox-field';
+import { SubmitButton, SubmitButtonContent, SubmitButtonSuccess } from '../form/submit-button';
 
 const schema = z.object({
   id: z.string().transform((val) => val.toUpperCase()).refine((val) => val.length === 6, {
@@ -14,14 +15,8 @@ const schema = z.object({
   groupId: z.literal('remove-coupon'),
   testOptional: z.string().optional(),
   testNullable: z.coerce.number().nullable(),
+  disabledCheckbox: z.boolean(),
 });
-
-const defaultValues = {
-  id: 'abcdef',
-  groupId: 'remove-coupon',
-  testOptional: '',
-  testNullable: null,
-};
 
 const RemoveCouponForm = () => {
   const handleSubmit = (data: z.infer<typeof schema>) => {
@@ -29,17 +24,25 @@ const RemoveCouponForm = () => {
   };
 
   return (
-    <Card className="p-4">
+    <Card className="p-4 h-fit">
       <CardHeader>
         <h2>Remove Coupon</h2>
       </CardHeader>
       <CardContent>
-        <Form schema={schema} onSubmit={handleSubmit} defaultValues={defaultValues} className='grid gap-4'>
+        <Form schema={schema} onSubmit={handleSubmit} className='grid gap-4'>
           <InputField name="id" label="ID" />
-          <InputField name="groupId" label="Group ID" disabled />
+          <InputField name="groupId" label="Group ID" disabled defaultValue={'remove-coupon'} />
           <InputField name="testOptional" label="Test Optional" />
-          <InputField name="testNullable" label="Test Nullable" type="number" />
-          <Button type="submit">Remove Coupon</Button>
+          <InputField name="testNullable" label="Test Nullable" type="number" defaultValue={0} />
+          <CheckboxField name="disabledCheckbox" label="Disabled Checkbox" defaultValue={true} disabled={true} />
+          <SubmitButton>
+            <SubmitButtonContent>
+              Remove Coupon
+            </SubmitButtonContent>
+            <SubmitButtonSuccess>
+              Removed!
+            </SubmitButtonSuccess>
+          </SubmitButton>
         </Form>
       </CardContent>
     </Card>

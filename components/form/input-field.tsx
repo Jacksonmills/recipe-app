@@ -1,7 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import React from "react";
 
 interface InputFieldProps {
@@ -10,7 +9,8 @@ interface InputFieldProps {
   type?: React.InputHTMLAttributes<HTMLInputElement>['type'];
   placeholder?: React.InputHTMLAttributes<HTMLInputElement>['placeholder'];
   disabled?: React.InputHTMLAttributes<HTMLInputElement>['disabled'];
-  submit?: boolean;
+  submitButton?: React.ReactNode;
+  defaultValue?: string | number;
 }
 
 const InputField = ({
@@ -19,26 +19,25 @@ const InputField = ({
   type = 'text',
   placeholder,
   disabled = false,
-  submit = false,
+  submitButton = false,
+  defaultValue = '',
 }: InputFieldProps) => {
-  const { control, formState } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <FormField
       control={control}
       name={name}
+      defaultValue={defaultValue}
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <div className="flex gap-1">
+          <div className="flex gap-2">
             <FormControl>
               <Input type={type} placeholder={placeholder} disabled={disabled} {...field} />
             </FormControl>
-            {submit && (
-              <Button type="submit" disabled={formState.isSubmitting}>
-                Submit
-              </Button>
-            )}
+            
+            {submitButton && submitButton}
           </div>
           <FormMessage />
         </FormItem>

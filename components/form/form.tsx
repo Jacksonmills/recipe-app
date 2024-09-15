@@ -8,17 +8,15 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-  defaultValues: Record<string, unknown>;
   schema: z.ZodObject<ZodRawShape>;
   onSubmit: (data: z.infer<z.ZodType>) => void;
   children: React.ReactNode;
   options?: UseFormProps<z.infer<z.ZodType>>;
 }
 
-const Form = ({ defaultValues, schema, onSubmit, options, children, className }: FormProps) => {
+const Form = ({ schema, onSubmit, options, children, className }: FormProps) => {
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues,
     ...options,
   });
 

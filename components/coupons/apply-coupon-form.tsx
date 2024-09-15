@@ -6,7 +6,7 @@ import InputField from "../form/input-field";
 import { applyCouponCode } from "./actions";
 import CheckboxField from "../form/checkbox-field";
 import { Card, CardFooter, CardHeader } from "../ui/card";
-import { SubmitButton } from "../form/submit-button";
+import { SubmitButton, SubmitButtonContent, SubmitButtonLoading, SubmitButtonSuccess } from "../form/submit-button";
 import { FormGroup } from "../ui/form";
 
 const schema = z.object({
@@ -15,11 +15,6 @@ const schema = z.object({
     message: "Please read and accept the terms and conditions",
   })
 })
-
-const defaultValues = {
-  code: 'Hello from zod',
-  agreement: false
-}
 
 const ApplyCouponForm = () => {
   const onSubmit = async (data: z.infer<typeof schema>) => {
@@ -30,20 +25,39 @@ const ApplyCouponForm = () => {
     applyCouponCode(formData)
   }
 
+  const submitButton = (
+    <div>
+      <SubmitButton>
+        <SubmitButtonContent>
+          Apply 
+        </SubmitButtonContent>
+        <SubmitButtonLoading>
+          Applying...
+        </SubmitButtonLoading>
+        <SubmitButtonSuccess>
+          Applied! ✔️
+        </SubmitButtonSuccess>
+      </SubmitButton>
+    </div>
+  )
+
   return (
-    <Card className="p-4">
+    <Card className="p-4 h-fit">
       <CardHeader>
         <h2>Apply Coupon</h2>
       </CardHeader>
       <CardFooter>
-        <Form onSubmit={onSubmit} schema={schema} defaultValues={defaultValues}>
+        <Form onSubmit={onSubmit} schema={schema}>
           <div className="grid gap-4">
             <FormGroup name="apply coupon code form group" className="grid gap-4">
-              <InputField name="code" label="Coupon Code" placeholder="Enter your coupon code" />
+              <InputField
+                name="code"
+                label="Coupon Code"
+                placeholder="Enter your coupon code"
+                submitButton={submitButton}
+              />
               <CheckboxField name="agreement" label="I agree to the terms and conditions" />
             </FormGroup>
-
-            <SubmitButton />
           </div>
         </Form>
       </CardFooter>
