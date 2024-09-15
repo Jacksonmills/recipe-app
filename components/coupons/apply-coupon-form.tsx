@@ -26,22 +26,22 @@ const ApplyCouponForm = () => {
   }
 
   return (
-    <Card className="p-4 w-full">
-    <CardHeader>
-      <h2>Apply Coupon</h2>
-    </CardHeader>
-    <CardFooter>
-      <Form onSubmit={onSubmit} schema={schema}>
-        <div className="grid gap-4">
-          <FormGroup name="apply coupon code form group" className="flex gap-4">
-            <InputField name="code" label="Coupon Code" placeholder="Enter your coupon code" />
-            <CheckboxField name="agreement" label="I agree to the terms and conditions" />
-          </FormGroup>
+    <Card className="p-4">
+      <CardHeader>
+        <h2>Apply Coupon</h2>
+      </CardHeader>
+      <CardFooter>
+        <Form onSubmit={onSubmit} schema={schema}>
+          <div className="grid gap-4">
+            <FormGroup name="apply coupon code form group" className="grid gap-4">
+              <InputField name="code" label="Coupon Code" placeholder="Enter your coupon code" />
+              <CheckboxField name="agreement" label="I agree to the terms and conditions" />
+            </FormGroup>
 
-          <SubmitButton />
-        </div>
-      </Form>
-    </CardFooter>
+            <SubmitButton />
+          </div>
+        </Form>
+      </CardFooter>
     </Card>
   );
 };

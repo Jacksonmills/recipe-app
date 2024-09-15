@@ -38,8 +38,10 @@ export default async function RootLayout({
           <AppSidebar />
           <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-gradient-to-b from-background/50 to-transparent">
             <div className="h-full grid [&>*]:col-start-1 [&>*]:row-start-1">
-              <div className="p-5 z-20">
-                <ClientSidebarTrigger />
+              <div className="p-5 z-20 pointer-events-none">
+                <div className="pointer-events-auto">
+                  <ClientSidebarTrigger />
+                </div>
               </div>
               <div className="size-full">
                 {children}

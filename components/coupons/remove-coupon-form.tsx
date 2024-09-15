@@ -4,7 +4,7 @@ import React from 'react';
 import { z } from 'zod';
 import Form from '../form/form';
 import InputField from '../form/input-field';
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent, CardHeader } from '../ui/card';
 import { Button } from '../ui/button';
 
 const schema = z.object({
@@ -22,9 +22,12 @@ const RemoveCouponForm = () => {
   };
 
   return (
-    <Card className="w-full">
+    <Card className="p-4">
+      <CardHeader>
+        <h2>Remove Coupon</h2>
+      </CardHeader>
       <CardContent>
-        <Form schema={schema} onSubmit={handleSubmit}>
+        <Form schema={schema} onSubmit={handleSubmit} className='grid gap-4'>
           <InputField name="id" label="ID" />
           <InputField name="groupId" label="Group ID" disabled />
           <InputField name="testOptional" label="Test Optional" />

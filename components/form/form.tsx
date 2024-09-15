@@ -4,8 +4,10 @@ import { DefaultValues, useForm, UseFormProps } from 'react-hook-form';
 import { z, ZodRawShape } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form as RHFForm } from '../ui/form';
+import React from 'react';
+import { cn } from '@/lib/utils';
 
-interface FormProps {
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   schema: z.ZodObject<ZodRawShape>;
   onSubmit: (data: z.infer<z.ZodType>) => void;
   children: React.ReactNode;
@@ -57,7 +59,7 @@ function inferDefaultValues(schema: z.ZodTypeAny): DefaultValues<z.infer<z.ZodTy
   return defaultValues as DefaultValues<z.infer<z.ZodTypeAny>>;
 }
 
-const Form = ({ schema, onSubmit, children, options }: FormProps) => {
+const Form = ({ schema, onSubmit, options, children, className }: FormProps) => {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: inferDefaultValues(schema),
@@ -66,7 +68,7 @@ const Form = ({ schema, onSubmit, children, options }: FormProps) => {
 
   return (
     <RHFForm {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('w-full', className)}>
         {children}
       </form>
     </RHFForm>

@@ -6,7 +6,7 @@ import { PanelLeft } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import { VariantProps } from "class-variance-authority";
 
 export const SIDEBAR_STATE_COOKIE = "sidebar:state"
@@ -39,7 +39,7 @@ const SidebarLayout = React.forwardRef<
     setOpen(open)
     document.cookie = `${SIDEBAR_STATE_COOKIE}=${open}; path=/; max-age=${
       60 * 60 * 24 * 7
-    }`
+    }; SameSite=None; Secure`
   }, [])
 
   const state = open ? "open" : "closed"
@@ -128,6 +128,12 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
             className="w-[260px] p-0 md:w-[--sidebar-width] [&>button]:hidden"
             side="left"
           >
+            <SheetTitle>
+              Website sidebar
+            </SheetTitle>
+            <SheetDescription>
+              This is the sidebar of the website.
+            </SheetDescription>
             {sidebar}
           </SheetContent>
         </Sheet>
