@@ -30,20 +30,19 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark bg-accent`}
+        className={`${geistSans.variable} ${geistMono.variable} font-[family-name:var(--font-geist-mono)] antialiased dark bg-accent`}
       >
         <SidebarLayout
           defaultOpen={cookies().get("sidebar:state")?.value === "true"}
         >
           <AppSidebar />
           <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-gradient-to-b from-background/50 to-transparent">
-            <div className="h-full p-2 relative">
-              <div className="size-full relative">
-                {children}
-              </div>
-              
-              <div className="absolute top-5 left-5">
+            <div className="h-full grid [&>*]:col-start-1 [&>*]:row-start-1">
+              <div className="p-5 z-20">
                 <ClientSidebarTrigger />
+              </div>
+              <div className="size-full">
+                {children}
               </div>
             </div>
           </main>

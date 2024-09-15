@@ -93,10 +93,28 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ className, children }, ref) => {
     const isMobile = useIsMobile()
     const { open, onOpenChange } = useSidebar()
+    const sidebarRef = React.useRef<HTMLDivElement>(null)
+
+    React.useEffect(() => {
+      if (sidebarRef.current) {
+        const focusableElements = sidebarRef.current.querySelectorAll(
+          'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        )
+
+        focusableElements.forEach((element) => {
+          if (!open) {
+            (element as HTMLElement).setAttribute('tabindex', '-1')
+          } else {
+            (element as HTMLElement).removeAttribute('tabindex')
+          }
+        })
+      }
+    }, [open])
 
     const sidebar = (
       <div
         ref={ref}
+        aria-hidden={!open}
         className={cn("flex h-full flex-col border-r bg-background", className)}
       >
         {children}
@@ -117,7 +135,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
     }
 
     return (
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-[--sidebar-width] transition-all duration-300 ease-in-out md:block [[data-sidebar=closed]_&]:left-[calc(var(--sidebar-width)*-1)]">
+      <aside ref={sidebarRef} className="fixed inset-y-0 left-0 z-10 hidden w-[--sidebar-width] transition-all duration-300 ease-in-out md:block [[data-sidebar=closed]_&]:left-[calc(var(--sidebar-width)*-1)]">
         {sidebar}
       </aside>
     )

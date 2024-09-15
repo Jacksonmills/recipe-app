@@ -10,6 +10,6 @@ export function ClientSidebarTrigger() {
   }
 
   return (
-    <SidebarTrigger variant="secondary" />
+    <SidebarTrigger tabIndex={0} variant="secondary" />
   )
 }
