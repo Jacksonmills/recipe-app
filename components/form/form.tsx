@@ -22,7 +22,7 @@ function unwrapSchema(schema: z.ZodTypeAny): z.ZodTypeAny {
   return schema;
 }
 
-function inferDefaultValues<T extends z.ZodTypeAny>(schema: T): DefaultValues<z.infer<T>> {
+function inferDefaultValues(schema: z.ZodTypeAny): DefaultValues<z.infer<z.ZodTypeAny>> {
   const defaultValues: Record<string, unknown> = {};
 
   const shape = schema instanceof z.ZodObject ? schema.shape : {};
@@ -54,7 +54,7 @@ function inferDefaultValues<T extends z.ZodTypeAny>(schema: T): DefaultValues<z.
     }
   }
 
-  return defaultValues as DefaultValues<z.infer<T>>;
+  return defaultValues as DefaultValues<z.infer<z.ZodTypeAny>>;
 }
 
 const Form = ({ schema, onSubmit, children, options }: FormProps) => {
