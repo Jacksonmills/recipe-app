@@ -5,7 +5,7 @@ import RemoveCouponForm from "@/components/coupons/remove-coupon-form";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <div className="grid min-h-28">
         <img
           src="https://placeholdmon.vercel.app/1200x100"
@@ -21,6 +21,6 @@ export default function Home() {
         <ApplyCouponForm />
         <RemoveCouponForm />
       </div>
-    </>
+    </div>
   );
 }

@@ -36,14 +36,14 @@ export default async function RootLayout({
           defaultOpen={cookies().get("sidebar:state")?.value === "true"}
         >
           <AppSidebar />
-          <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-gradient-to-b from-background/50 to-transparent">
+          <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-background h-screen w-full overflow-none">
             <div className="h-full grid [&>*]:col-start-1 [&>*]:row-start-1">
               <div className="p-5 z-20 pointer-events-none">
                 <div className="pointer-events-auto">
                   <ClientSidebarTrigger />
                 </div>
               </div>
-              <div className="size-full">{children}</div>
+              {children}
             </div>
           </main>
         </SidebarLayout>

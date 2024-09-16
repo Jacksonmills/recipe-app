@@ -11,7 +11,7 @@ import {
   FormProvider,
   type UseFormProps,
   useForm,
-  useFormContext,
+  useFormContext as useRHFContext,
 } from "react-hook-form";
 
 import { Label } from "@/components/ui/label";
@@ -19,11 +19,22 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 
+const useFormContext = () => {
+  const context = useRHFContext();
+
+  if (!context) {
+    throw new Error("useFormContext must be used within a <Form> component.");
+  }
+
+  return context;
+};
+
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   schema: z.ZodObject<z.ZodRawShape>;
-  onSubmit: (data: z.infer<z.ZodType>) => void;
+  onSubmit: (data: z.infer<z.ZodType>) => void | Promise<void>;
   children: React.ReactNode;
   options?: UseFormProps<z.infer<z.ZodType>>;
+  reset?: boolean;
 }
 
 const Form = ({
@@ -31,6 +42,7 @@ const Form = ({
   onSubmit,
   options,
   children,
+  reset = false,
   className,
 }: FormProps) => {
   const form = useForm({
@@ -38,10 +50,18 @@ const Form = ({
     ...options,
   });
 
+  async function handleOnSubmit() {
+    await onSubmit(form.getValues());
+
+    if (reset) {
+      form.reset();
+    }
+  }
+
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(handleOnSubmit)}
         className={cn("w-full", className)}
       >
         {children}
@@ -219,6 +239,7 @@ const FormGroup = React.forwardRef<
 FormGroup.displayName = "FormGroup";
 
 export {
+  useFormContext,
   useFormField,
   FormProvider,
   Form,

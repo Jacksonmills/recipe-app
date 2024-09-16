@@ -45,7 +45,7 @@ const ApplyCouponForm = () => {
         <h2>Apply Coupon</h2>
       </CardHeader>
       <CardFooter>
-        <Form onSubmit={onSubmit} schema={schema}>
+        <Form onSubmit={onSubmit} schema={schema} reset={true}>
           <div className="grid gap-4">
             <FormGroup
               name="apply coupon code form group"
