@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { PanelLeft } from "lucide-react";
-import * as React from "react";
+import { PanelLeft } from 'lucide-react';
+import * as React from 'react';
 
-import { Button, type buttonVariants } from "@/components/ui/button";
+import { Button, type buttonVariants } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
-import type { VariantProps } from "class-variance-authority";
+} from '@/components/ui/sheet';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
+import type { VariantProps } from 'class-variance-authority';
 
-export const SIDEBAR_STATE_COOKIE = "sidebar:state";
+export const SIDEBAR_STATE_COOKIE = 'sidebar:state';
 
 type SidebarContext = {
-  state: "open" | "closed";
+  state: 'open' | 'closed';
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
 
 const SidebarContext = React.createContext<SidebarContext>({
-  state: "open",
+  state: 'open',
   open: true,
   onOpenChange: () => {},
 });
@@ -34,7 +34,7 @@ function useSidebar() {
 
 const SidebarLayout = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div"> & {
+  React.ComponentProps<'div'> & {
     defaultOpen?: boolean;
   }
 >(({ defaultOpen, className, ...props }, ref) => {
@@ -47,7 +47,7 @@ const SidebarLayout = React.forwardRef<
     }; SameSite=None; Secure`;
   }, []);
 
-  const state = open ? "open" : "closed";
+  const state = open ? 'open' : 'closed';
 
   return (
     <SidebarContext.Provider value={{ state, open, onOpenChange }}>
@@ -56,11 +56,11 @@ const SidebarLayout = React.forwardRef<
         data-sidebar={state}
         style={
           {
-            "--sidebar-width": "16rem",
+            '--sidebar-width': '16rem',
           } as React.CSSProperties
         }
         className={cn(
-          "flex min-h-screen  pl-0 transition-all duration-300 ease-in-out data-[sidebar=closed]:pl-0 sm:pl-[--sidebar-width]",
+          'flex min-h-screen  pl-0 transition-all duration-300 ease-in-out data-[sidebar=closed]:pl-0 sm:pl-[--sidebar-width]',
           className,
         )}
         {...props}
@@ -68,12 +68,12 @@ const SidebarLayout = React.forwardRef<
     </SidebarContext.Provider>
   );
 });
-SidebarLayout.displayName = "SidebarLayout";
+SidebarLayout.displayName = 'SidebarLayout';
 
 const SidebarTrigger = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<"button"> & {
-    variant?: VariantProps<typeof buttonVariants>["variant"];
+  React.ComponentProps<'button'> & {
+    variant?: VariantProps<typeof buttonVariants>['variant'];
   }
 >(({ className, variant, ...props }, ref) => {
   const { open, onOpenChange } = useSidebar();
@@ -81,9 +81,9 @@ const SidebarTrigger = React.forwardRef<
   return (
     <Button
       ref={ref}
-      variant={variant || "ghost"}
+      variant={variant || 'ghost'}
       size="icon"
-      className={cn("h-8 w-8", className)}
+      className={cn('h-8 w-8', className)}
       onClick={() => onOpenChange(!open)}
       {...props}
     >
@@ -92,9 +92,9 @@ const SidebarTrigger = React.forwardRef<
     </Button>
   );
 });
-SidebarTrigger.displayName = "SidebarTrigger";
+SidebarTrigger.displayName = 'SidebarTrigger';
 
-const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
+const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
   ({ className, children }, ref) => {
     const isMobile = useIsMobile();
     const { open, onOpenChange } = useSidebar();
@@ -108,9 +108,9 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
 
         for (const element of focusableElements) {
           if (!open) {
-            (element as HTMLElement).setAttribute("tabindex", "-1");
+            (element as HTMLElement).setAttribute('tabindex', '-1');
           } else {
-            (element as HTMLElement).removeAttribute("tabindex");
+            (element as HTMLElement).removeAttribute('tabindex');
           }
         }
       }
@@ -120,7 +120,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
       <div
         ref={ref}
         aria-hidden={!open}
-        className={cn("flex h-full flex-col border-r bg-background", className)}
+        className={cn('flex h-full flex-col border-r bg-background', className)}
       >
         {children}
       </div>
@@ -153,76 +153,76 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
     );
   },
 );
-Sidebar.displayName = "Sidebar";
+Sidebar.displayName = 'Sidebar';
 
 const SidebarHeader = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div">
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}
-      className={cn("flex items-center border-b p-2.5", className)}
+      className={cn('flex items-center border-b p-2.5', className)}
       {...props}
     />
   );
 });
-SidebarHeader.displayName = "SidebarHeader";
+SidebarHeader.displayName = 'SidebarHeader';
 
 const SidebarFooter = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div">
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}
-      className={cn("flex items-center border-t p-2.5", className)}
+      className={cn('flex items-center border-t p-2.5', className)}
       {...props}
     />
   );
 });
-SidebarFooter.displayName = "SidebarFooter";
+SidebarFooter.displayName = 'SidebarFooter';
 
 const SidebarContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div">
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}
-      className={cn("flex flex-1 flex-col gap-5 overflow-auto py-4", className)}
+      className={cn('flex flex-1 flex-col gap-5 overflow-auto py-4', className)}
       {...props}
     />
   );
 });
-SidebarContent.displayName = "SidebarContent";
+SidebarContent.displayName = 'SidebarContent';
 
 const SidebarItem = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div">
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   return (
-    <div ref={ref} className={cn("grid gap-2 px-2.5", className)} {...props} />
+    <div ref={ref} className={cn('grid gap-2 px-2.5', className)} {...props} />
   );
 });
-SidebarItem.displayName = "SidebarItem";
+SidebarItem.displayName = 'SidebarItem';
 
 const SidebarLabel = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div">
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}
       className={cn(
-        "px-1.5 text-xs font-medium text-muted-foreground",
+        'px-1.5 text-xs font-medium text-muted-foreground',
         className,
       )}
       {...props}
     />
   );
 });
-SidebarLabel.displayName = "SidebarLabel";
+SidebarLabel.displayName = 'SidebarLabel';
 
 export {
   Sidebar,

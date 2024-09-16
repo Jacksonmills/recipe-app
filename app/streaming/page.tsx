@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { Loading } from "@/components/loading";
-import { RecipeCard } from "@/components/recipe-card";
-import { Input } from "@/components/ui/input";
-import type { RecipeSchema } from "@/lib/recipe-schema";
-import { parse } from "partial-json";
-import { useState } from "react";
-import type { z } from "zod";
+import { Loading } from '@/components/loading';
+import { RecipeCard } from '@/components/recipe-card';
+import { Input } from '@/components/ui/input';
+import type { RecipeSchema } from '@/lib/recipe-schema';
+import { parse } from 'partial-json';
+import { useState } from 'react';
+import type { z } from 'zod';
 
 export default function StreamingPage() {
-  const [prompt, setPrompt] = useState("A succulent orange chicken.");
+  const [prompt, setPrompt] = useState('A succulent orange chicken.');
   const [isLoading, setIsLoading] = useState(false);
   const [recipe, setRecipe] = useState<z.infer<typeof RecipeSchema>>();
 
   const handleSubmit = async () => {
-    setPrompt("");
+    setPrompt('');
     setIsLoading(true);
     setRecipe(undefined);
 
-    const data = await fetch("/streaming/api", {
-      method: "POST",
+    const data = await fetch('/streaming/api', {
+      method: 'POST',
       body: JSON.stringify({ prompt }),
     });
 
@@ -27,7 +27,7 @@ export default function StreamingPage() {
     if (!reader) return;
 
     const decoder = new TextDecoder();
-    let result = "";
+    let result = '';
     let parsed = {};
     while (true) {
       const { done, value } = await reader.read();
@@ -46,7 +46,7 @@ export default function StreamingPage() {
         value={prompt}
         disabled={isLoading}
         onChange={(e) => setPrompt(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+        onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
         placeholder="Enter a prompt..."
       />
       {isLoading && <Loading />}

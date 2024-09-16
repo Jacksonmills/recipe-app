@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import React from "react";
-import { z } from "zod";
-import CheckboxField from "../form/checkbox-field";
+import React from 'react';
+import { z } from 'zod';
+import CheckboxField from '../form/checkbox-field';
 import {
   FormSubmit,
   FormSubmitIdle,
   FormSubmitSuccess,
-} from "../form/form-submit";
-import InputField from "../form/input-field";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Form } from "../ui/form";
+} from '../form/form-submit';
+import InputField from '../form/input-field';
+import { Card, CardContent, CardHeader } from '../ui/card';
+import { Form } from '../ui/form';
 
 const schema = z.object({
   id: z
     .string()
     .transform((val) => val.toUpperCase())
     .refine((val) => val.length === 6, {
-      message: "ID must be 6 characters long",
+      message: 'ID must be 6 characters long',
     }),
-  groupId: z.literal("remove-coupon"),
+  groupId: z.literal('remove-coupon'),
   testOptional: z.string().optional(),
   testNullable: z.coerce.number().nullable(),
   disabledCheckbox: z.boolean(),
@@ -27,7 +27,7 @@ const schema = z.object({
 
 const RemoveCouponForm = () => {
   const handleSubmit = (data: z.infer<typeof schema>) => {
-    console.log("Form Data:", data);
+    console.log('Form Data:', data);
   };
 
   return (
@@ -42,7 +42,7 @@ const RemoveCouponForm = () => {
             name="groupId"
             label="Group ID"
             disabled
-            defaultValue={"remove-coupon"}
+            defaultValue={'remove-coupon'}
           />
           <InputField name="testOptional" label="Test Optional" />
           <InputField

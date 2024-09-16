@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { Loading } from "@/components/loading";
-import { RecipeCard } from "@/components/recipe-card";
-import { Input } from "@/components/ui/input";
-import { RecipeSchema } from "@/lib/recipe-schema";
-import { experimental_useObject as useObject } from "ai/react";
-import { useState } from "react";
+import { Loading } from '@/components/loading';
+import { RecipeCard } from '@/components/recipe-card';
+import { Input } from '@/components/ui/input';
+import { RecipeSchema } from '@/lib/recipe-schema';
+import { experimental_useObject as useObject } from 'ai/react';
+import { useState } from 'react';
 
 export default function VercelAiPage() {
-  const [prompt, setPrompt] = useState("A succulent orange chicken.");
+  const [prompt, setPrompt] = useState('A succulent orange chicken.');
   const { object, submit, isLoading } = useObject({
     schema: RecipeSchema,
-    api: "/vercel-ai/api",
-    initialValue: { name: "", ingredients: [], steps: [] },
+    api: '/vercel-ai/api',
+    initialValue: { name: '', ingredients: [], steps: [] },
   });
 
   const handleSubmit = () => {
     submit({ prompt });
-    setPrompt("");
+    setPrompt('');
   };
 
   return (
@@ -26,7 +26,7 @@ export default function VercelAiPage() {
         value={prompt}
         disabled={isLoading}
         onChange={(e) => setPrompt(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+        onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
         placeholder="Enter a prompt..."
       />
       {isLoading && <Loading />}

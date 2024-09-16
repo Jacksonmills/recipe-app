@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { cn } from "@/lib/utils";
-import { ChevronRight, type LucideIcon } from "lucide-react";
-import Link from "next/link";
+} from '@/components/ui/collapsible';
+import { cn } from '@/lib/utils';
+import { ChevronRight, type LucideIcon } from 'lucide-react';
+import Link from 'next/link';
 
 export function NavMain({
   className,
@@ -24,9 +24,9 @@ export function NavMain({
       url: string;
     }[];
   }[];
-} & React.ComponentProps<"ul">) {
+} & React.ComponentProps<'ul'>) {
   return (
-    <ul className={cn("grid gap-0.5", className)}>
+    <ul className={cn('grid gap-0.5', className)}>
       {items.map((item) => (
         <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
           <li>

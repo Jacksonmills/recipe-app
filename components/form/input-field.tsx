@@ -1,4 +1,4 @@
-import type React from "react";
+import type React from 'react';
 import {
   FormControl,
   FormField,
@@ -6,15 +6,15 @@ import {
   FormLabel,
   FormMessage,
   useFormContext,
-} from "../ui/form";
-import { Input } from "../ui/input";
+} from '../ui/form';
+import { Input } from '../ui/input';
 
 interface InputFieldProps {
   name: string;
   label: string;
-  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
-  placeholder?: React.InputHTMLAttributes<HTMLInputElement>["placeholder"];
-  disabled?: React.InputHTMLAttributes<HTMLInputElement>["disabled"];
+  type?: React.InputHTMLAttributes<HTMLInputElement>['type'];
+  placeholder?: React.InputHTMLAttributes<HTMLInputElement>['placeholder'];
+  disabled?: React.InputHTMLAttributes<HTMLInputElement>['disabled'];
   submitButton?: React.ReactNode;
   defaultValue?: string | number;
 }
@@ -22,11 +22,11 @@ interface InputFieldProps {
 const InputField = ({
   name,
   label,
-  type = "text",
+  type = 'text',
   placeholder,
   disabled = false,
   submitButton = false,
-  defaultValue = "",
+  defaultValue = '',
 }: InputFieldProps) => {
   const { control } = useFormContext();
 

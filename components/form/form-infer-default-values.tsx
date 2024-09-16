@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type React from "react";
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type React from 'react';
 import {
   type DefaultValues,
   type UseFormProps,
   useForm,
-} from "react-hook-form";
-import { type ZodRawShape, z } from "zod";
-import { FormProvider } from "../ui/form";
+} from 'react-hook-form';
+import { type ZodRawShape, z } from 'zod';
+import { FormProvider } from '../ui/form';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   schema: z.ZodObject<ZodRawShape>;
@@ -42,7 +42,7 @@ function inferDefaultValues(
     if (field instanceof z.ZodDefault) {
       defaultValues[key] = field._def.defaultValue();
     } else if (field instanceof z.ZodString) {
-      defaultValues[key] = "";
+      defaultValues[key] = '';
     } else if (field instanceof z.ZodNumber) {
       defaultValues[key] = 0;
     } else if (field instanceof z.ZodBoolean) {
@@ -82,7 +82,7 @@ const Form = ({
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("w-full", className)}
+        className={cn('w-full', className)}
       >
         {children}
       </form>

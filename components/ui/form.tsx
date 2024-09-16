@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import type * as LabelPrimitive from "@radix-ui/react-label";
-import { Slot } from "@radix-ui/react-slot";
-import * as React from "react";
+import type * as LabelPrimitive from '@radix-ui/react-label';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 import {
   Controller,
   type ControllerProps,
@@ -12,18 +12,18 @@ import {
   type UseFormProps,
   useForm,
   useFormContext as useRHFContext,
-} from "react-hook-form";
+} from 'react-hook-form';
 
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { z } from "zod";
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { z } from 'zod';
 
 const useFormContext = () => {
   const context = useRHFContext();
 
   if (!context) {
-    throw new Error("useFormContext must be used within a <Form> component.");
+    throw new Error('useFormContext must be used within a <Form> component.');
   }
 
   return context;
@@ -62,14 +62,14 @@ const Form = ({
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(handleOnSubmit)}
-        className={cn("w-full", className)}
+        className={cn('w-full', className)}
       >
         {children}
       </form>
     </FormProvider>
   );
 };
-Form.displayName = "Form";
+Form.displayName = 'Form';
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -108,7 +108,7 @@ const useFormField = () => {
   const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
-    throw new Error("useFormField should be used within <FormField>");
+    throw new Error('useFormField should be used within <FormField>');
   }
 
   const { id } = itemContext;
@@ -139,11 +139,11 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn('space-y-2', className)} {...props} />
     </FormItemContext.Provider>
   );
 });
-FormItem.displayName = "FormItem";
+FormItem.displayName = 'FormItem';
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
@@ -154,13 +154,13 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn(error && 'text-destructive', className)}
       htmlFor={formItemId}
       {...props}
     />
   );
 });
-FormLabel.displayName = "FormLabel";
+FormLabel.displayName = 'FormLabel';
 
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
@@ -183,7 +183,7 @@ const FormControl = React.forwardRef<
     />
   );
 });
-FormControl.displayName = "FormControl";
+FormControl.displayName = 'FormControl';
 
 const FormDescription = React.forwardRef<
   HTMLParagraphElement,
@@ -195,12 +195,12 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-[0.8rem] text-muted-foreground", className)}
+      className={cn('text-[0.8rem] text-muted-foreground', className)}
       {...props}
     />
   );
 });
-FormDescription.displayName = "FormDescription";
+FormDescription.displayName = 'FormDescription';
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
@@ -217,14 +217,14 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      className={cn('text-[0.8rem] font-medium text-destructive', className)}
       {...props}
     >
       {body}
     </p>
   );
 });
-FormMessage.displayName = "FormMessage";
+FormMessage.displayName = 'FormMessage';
 
 const FormGroup = React.forwardRef<
   HTMLFieldSetElement,
@@ -236,7 +236,7 @@ const FormGroup = React.forwardRef<
     </fieldset>
   );
 });
-FormGroup.displayName = "FormGroup";
+FormGroup.displayName = 'FormGroup';
 
 export {
   useFormContext,

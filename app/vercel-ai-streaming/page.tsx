@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { RecipeCard } from "@/components/recipe-card";
-import { experimental_useObject as useObject } from "ai/react";
+import { RecipeCard } from '@/components/recipe-card';
+import { experimental_useObject as useObject } from 'ai/react';
 
-import { RecipeSchema } from "@/lib/recipe-schema";
-import { Loader } from "lucide-react";
-import { z } from "zod";
-import InputField from "@/components/form/input-field";
-import { Form } from "@/components/ui/form";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import InputField from '@/components/form/input-field';
+import { Form } from '@/components/ui/form';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { RecipeSchema } from '@/lib/recipe-schema';
+import { Loader } from 'lucide-react';
+import { z } from 'zod';
 
 const schema = z.object({
   prompt: z.string().min(1),
@@ -17,13 +17,13 @@ const schema = z.object({
 export default function VercelAiStreamingPage() {
   const { object, submit, isLoading } = useObject({
     schema: RecipeSchema,
-    api: "/vercel-ai-streaming/api",
+    api: '/vercel-ai-streaming/api',
   });
 
   const onSubmit = ({
     prompt,
   }: {
-    prompt: z.infer<typeof schema>["prompt"];
+    prompt: z.infer<typeof schema>['prompt'];
   }) => {
     submit({ prompt });
   };
@@ -32,7 +32,7 @@ export default function VercelAiStreamingPage() {
     <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
       <ScrollArea
         style={{
-          height: "calc(100vh - (121px))",
+          height: 'calc(100vh - (121px))',
         }}
       >
         <div className="px-4 pt-12 pb-20">
@@ -44,7 +44,7 @@ export default function VercelAiStreamingPage() {
         <div
           className="p-20"
           style={{
-            height: "calc(100vh - (121px))",
+            height: 'calc(100vh - (121px))',
           }}
         >
           <div className="flex items-center justify-center h-full border border-dashed flex-col text-token-text-primary">
@@ -58,7 +58,7 @@ export default function VercelAiStreamingPage() {
       <div
         className="bg-gradient-to-t to-10% from-background/75 to-transparent pointer-events-none z-20"
         style={{
-          height: "calc(100vh - (121px))",
+          height: 'calc(100vh - (121px))',
         }}
       />
 

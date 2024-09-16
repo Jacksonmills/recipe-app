@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import * as React from "react";
-import { useFormContext } from "react-hook-form";
-import { Button } from "../ui/button";
+import { cn } from '@/lib/utils';
+import * as React from 'react';
+import { useFormContext } from 'react-hook-form';
+import { Button } from '../ui/button';
 
 const FormSubmit = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ children, className, ...props }, ref) => {
   return (
-    <Button ref={ref} type="submit" className={cn("", className)} {...props}>
+    <Button ref={ref} type="submit" className={cn('', className)} {...props}>
       {children}
     </Button>
   );
 });
-FormSubmit.displayName = "FormSubmit";
+FormSubmit.displayName = 'FormSubmit';
 
 const FormSubmitIdle = React.forwardRef<
   HTMLDivElement,
@@ -33,7 +33,7 @@ const FormSubmitIdle = React.forwardRef<
     </div>
   );
 });
-FormSubmitIdle.displayName = "FormSubmitIdle";
+FormSubmitIdle.displayName = 'FormSubmitIdle';
 
 const FormSubmitLoading = React.forwardRef<
   HTMLDivElement,
@@ -51,7 +51,7 @@ const FormSubmitLoading = React.forwardRef<
     </div>
   );
 });
-FormSubmitLoading.displayName = "FormSubmitLoading";
+FormSubmitLoading.displayName = 'FormSubmitLoading';
 
 const FormSubmitSuccess = React.forwardRef<
   HTMLDivElement,
@@ -69,6 +69,6 @@ const FormSubmitSuccess = React.forwardRef<
     </div>
   );
 });
-FormSubmitSuccess.displayName = "FormSubmitSuccess";
+FormSubmitSuccess.displayName = 'FormSubmitSuccess';
 
 export { FormSubmit, FormSubmitIdle, FormSubmitLoading, FormSubmitSuccess };

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import type { LucideIcon } from "lucide-react";
-import Link from "next/link";
+import type { LucideIcon } from 'lucide-react';
+import Link from 'next/link';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export function NavSecondary({
   className,
@@ -18,13 +18,13 @@ export function NavSecondary({
       url: string;
     }[];
   }[];
-} & React.ComponentProps<"ul">) {
+} & React.ComponentProps<'ul'>) {
   if (!items?.length) {
     return null;
   }
 
   return (
-    <ul className={cn("grid gap-0.5", className)}>
+    <ul className={cn('grid gap-0.5', className)}>
       {items.map((item) => (
         <li key={item.title}>
           <Link

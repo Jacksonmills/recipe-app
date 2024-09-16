@@ -1,15 +1,15 @@
-import { type LucideIcon, MoreHorizontal, PlusSquare } from "lucide-react";
-import Link from "next/link";
+import { type LucideIcon, MoreHorizontal, PlusSquare } from 'lucide-react';
+import Link from 'next/link';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 export function NavProjects({
   projects,
@@ -20,9 +20,9 @@ export function NavProjects({
     url: string;
     icon: LucideIcon;
   }[];
-} & React.ComponentProps<"ul">) {
+} & React.ComponentProps<'ul'>) {
   return (
-    <ul className={cn("grid gap-0.5", className)}>
+    <ul className={cn('grid gap-0.5', className)}>
       {projects.map((item) => (
         <li
           key={item.name}

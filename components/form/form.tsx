@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type React from "react";
-import { type UseFormProps, useForm } from "react-hook-form";
-import type { ZodRawShape, z } from "zod";
-import { FormProvider } from "../ui/form";
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type React from 'react';
+import { type UseFormProps, useForm } from 'react-hook-form';
+import type { ZodRawShape, z } from 'zod';
+import { FormProvider } from '../ui/form';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   schema: z.ZodObject<ZodRawShape>;
@@ -30,7 +30,7 @@ const Form = ({
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("w-full", className)}
+        className={cn('w-full', className)}
       >
         {children}
       </form>

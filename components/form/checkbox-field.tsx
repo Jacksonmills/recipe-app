@@ -1,5 +1,5 @@
-import type React from "react";
-import { Checkbox } from "../ui/checkbox";
+import type React from 'react';
+import { Checkbox } from '../ui/checkbox';
 import {
   FormControl,
   FormField,
@@ -7,12 +7,12 @@ import {
   FormLabel,
   FormMessage,
   useFormContext,
-} from "../ui/form";
+} from '../ui/form';
 
 interface CheckboxFieldProps {
   name: string;
   label: string;
-  disabled?: React.InputHTMLAttributes<HTMLInputElement>["disabled"];
+  disabled?: React.InputHTMLAttributes<HTMLInputElement>['disabled'];
   defaultValue?: boolean;
 }
 

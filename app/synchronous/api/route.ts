@@ -1,9 +1,9 @@
-import { RecipeSchema } from "@/lib/recipe-schema";
-import { NextResponse } from "next/server";
-import OpenAI from "openai";
-import { zodResponseFormat } from "openai/helpers/zod";
+import { RecipeSchema } from '@/lib/recipe-schema';
+import { NextResponse } from 'next/server';
+import OpenAI from 'openai';
+import { zodResponseFormat } from 'openai/helpers/zod';
 
-const modelName = "gpt-4o-2024-08-06";
+const modelName = 'gpt-4o-2024-08-06';
 
 export async function POST(req: Request) {
   const { prompt } = await req.json();
@@ -14,14 +14,14 @@ export async function POST(req: Request) {
     model: modelName,
     messages: [
       {
-        role: "user",
-        content: `Recipe for ${prompt || "a succulent orange chicken"}:`,
+        role: 'user',
+        content: `Recipe for ${prompt || 'a succulent orange chicken'}:`,
       },
     ],
-    response_format: zodResponseFormat(RecipeSchema, "recipeSchema"),
+    response_format: zodResponseFormat(RecipeSchema, 'recipeSchema'),
   });
 
   return NextResponse.json(
-    JSON.parse(response.choices[0].message.content || ""),
+    JSON.parse(response.choices[0].message.content || ''),
   );
 }

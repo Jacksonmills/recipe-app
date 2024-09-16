@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { SidebarTrigger, useSidebar } from "./ui/sidebar";
+import { SidebarTrigger, useSidebar } from './ui/sidebar';
 
 export function ClientSidebarTrigger() {
   const { open } = useSidebar();
