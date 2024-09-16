@@ -5,8 +5,7 @@ import { useFormContext } from "react-hook-form"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
 
-// SubmitButton Component
-const SubmitButton = React.forwardRef<
+const FormSubmit = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ children, className, ...props }, ref) => {
@@ -21,10 +20,9 @@ const SubmitButton = React.forwardRef<
     </Button>
   )
 })
-SubmitButton.displayName = "SubmitButton"
+FormSubmit.displayName = "FormSubmit"
 
-// SubmitContent Component
-const SubmitButtonContent = React.forwardRef<
+const FormSubmitIdle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ children, ...props }, ref) => {
@@ -40,9 +38,9 @@ const SubmitButtonContent = React.forwardRef<
     </div>
   )
 })
-SubmitButtonContent.displayName = "SubmitButtonContent"
+FormSubmitIdle.displayName = "FormSubmitIdle"
 
-const SubmitButtonLoading = React.forwardRef<
+const FormSubmitLoading = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ children, ...props }, ref) => {
@@ -58,9 +56,9 @@ const SubmitButtonLoading = React.forwardRef<
     </div>
   )
 })
-SubmitButtonLoading.displayName = "SubmitButtonLoading"
+FormSubmitLoading.displayName = "FormSubmitLoading"
 
-const SubmitButtonSuccess = React.forwardRef<
+const FormSubmitSuccess = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ children, ...props }, ref) => {
@@ -76,11 +74,11 @@ const SubmitButtonSuccess = React.forwardRef<
     </div>
   )
 })
-SubmitButtonSuccess.displayName = "SubmitButtonSuccess"
+FormSubmitSuccess.displayName = "FormSubmitSuccess"
 
 export {
-  SubmitButton,
-  SubmitButtonContent,
-  SubmitButtonLoading,
-  SubmitButtonSuccess,
+  FormSubmit,
+  FormSubmitIdle,
+  FormSubmitLoading,
+  FormSubmitSuccess,
 }

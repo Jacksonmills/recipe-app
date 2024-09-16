@@ -3,7 +3,7 @@
 import { useForm, UseFormProps } from 'react-hook-form';
 import { z, ZodRawShape } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form as RHFForm } from '../ui/form';
+import { FormProvider } from '../ui/form';
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -21,11 +21,11 @@ const Form = ({ schema, onSubmit, options, children, className }: FormProps) => 
   });
 
   return (
-    <RHFForm {...form}>
+    <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={cn('w-full', className)}>
         {children}
       </form>
-    </RHFForm>
+    </FormProvider>
   );
 };
 

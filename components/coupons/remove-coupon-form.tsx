@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { z } from 'zod';
-import Form from '../form/form';
 import InputField from '../form/input-field';
 import { Card, CardContent, CardHeader } from '../ui/card';
 import CheckboxField from '../form/checkbox-field';
-import { SubmitButton, SubmitButtonContent, SubmitButtonSuccess } from '../form/submit-button';
+import { FormSubmit, FormSubmitIdle, FormSubmitSuccess } from '../form/form-submit';
+import { Form } from '../ui/form';
 
 const schema = z.object({
   id: z.string().transform((val) => val.toUpperCase()).refine((val) => val.length === 6, {
@@ -35,14 +35,14 @@ const RemoveCouponForm = () => {
           <InputField name="testOptional" label="Test Optional" />
           <InputField name="testNullable" label="Test Nullable" type="number" defaultValue={0} />
           <CheckboxField name="disabledCheckbox" label="Disabled Checkbox" defaultValue={true} disabled={true} />
-          <SubmitButton>
-            <SubmitButtonContent>
+          <FormSubmit>
+            <FormSubmitIdle>
               Remove Coupon
-            </SubmitButtonContent>
-            <SubmitButtonSuccess>
+            </FormSubmitIdle>
+            <FormSubmitSuccess>
               Removed!
-            </SubmitButtonSuccess>
-          </SubmitButton>
+            </FormSubmitSuccess>
+          </FormSubmit>
         </Form>
       </CardContent>
     </Card>

@@ -1,13 +1,12 @@
 'use client'
 
 import { z } from "zod";
-import Form from "../form/form";
 import InputField from "../form/input-field";
 import { applyCouponCode } from "./actions";
 import CheckboxField from "../form/checkbox-field";
 import { Card, CardFooter, CardHeader } from "../ui/card";
-import { SubmitButton, SubmitButtonContent, SubmitButtonLoading, SubmitButtonSuccess } from "../form/submit-button";
-import { FormGroup } from "../ui/form";
+import { FormSubmit, FormSubmitIdle, FormSubmitLoading, FormSubmitSuccess } from "../form/form-submit";
+import { Form, FormGroup } from "../ui/form";
 
 const schema = z.object({
   code: z.string().min(4).max(8),
@@ -27,17 +26,17 @@ const ApplyCouponForm = () => {
 
   const submitButton = (
     <div>
-      <SubmitButton>
-        <SubmitButtonContent>
+      <FormSubmit>
+        <FormSubmitIdle>
           Apply 
-        </SubmitButtonContent>
-        <SubmitButtonLoading>
+        </FormSubmitIdle>
+        <FormSubmitLoading>
           Applying...
-        </SubmitButtonLoading>
-        <SubmitButtonSuccess>
+        </FormSubmitLoading>
+        <FormSubmitSuccess>
           Applied! ✔️
-        </SubmitButtonSuccess>
-      </SubmitButton>
+        </FormSubmitSuccess>
+      </FormSubmit>
     </div>
   )
 
@@ -58,6 +57,9 @@ const ApplyCouponForm = () => {
               />
               <CheckboxField name="agreement" label="I agree to the terms and conditions" />
             </FormGroup>
+            <FormSubmit>
+              Submit with raw text as children
+            </FormSubmit>
           </div>
         </Form>
       </CardFooter>

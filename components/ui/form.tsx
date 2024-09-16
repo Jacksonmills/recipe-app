@@ -9,13 +9,38 @@ import {
   FieldPath,
   FieldValues,
   FormProvider,
-  useFormContext
+  useForm,
+  useFormContext,
+  UseFormProps
 } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-const Form = FormProvider
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+  schema: z.ZodObject<z.ZodRawShape>;
+  onSubmit: (data: z.infer<z.ZodType>) => void;
+  children: React.ReactNode;
+  options?: UseFormProps<z.infer<z.ZodType>>;
+}
+
+const Form = ({ schema, onSubmit, options, children, className }: FormProps) => {
+  const form = useForm({
+    resolver: zodResolver(schema),
+    ...options,
+  });
+
+  return (
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('w-full', className)}>
+        {children}
+      </form>
+    </FormProvider>
+  );
+};
+Form.displayName = "Form"
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -189,6 +214,7 @@ FormGroup.displayName = "FormGroup"
 
 export {
   useFormField,
+  FormProvider,
   Form,
   FormItem,
   FormLabel,
