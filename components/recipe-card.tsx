@@ -1,17 +1,19 @@
 import { z } from "zod";
 import Markdown from "react-markdown";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RecipeSchema } from "@/lib/recipe-schema";
 import { DeepPartial } from "ai";
 
-export function RecipeCard({ recipe }: { recipe?: DeepPartial<z.infer<typeof RecipeSchema>> }) {
+export function RecipeCard({
+  recipe,
+}: { recipe?: DeepPartial<z.infer<typeof RecipeSchema>> }) {
   if (!recipe) return null;
-  
+
   return (
     <Card className="w-full mx-auto max-w-7xl">
       <CardHeader>
-      <CardTitle className="text-2xl font-bold">{recipe.name}</CardTitle>
+        <CardTitle className="text-2xl font-bold">{recipe.name}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-6">
         {recipe.ingredients && recipe.ingredients.length > 0 && (
@@ -25,7 +27,7 @@ export function RecipeCard({ recipe }: { recipe?: DeepPartial<z.infer<typeof Rec
                   <li key={`${ingredient.ingredient}-${index}`}>
                     {ingredient.quantity} {ingredient.ingredient}
                   </li>
-                )
+                );
               })}
             </ul>
           </div>
@@ -44,5 +46,5 @@ export function RecipeCard({ recipe }: { recipe?: DeepPartial<z.infer<typeof Rec
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

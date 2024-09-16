@@ -12,11 +12,16 @@ export async function POST(req: Request) {
 
   const response = await client.chat.completions.create({
     model: modelName,
-    messages: [{ role: "user", content: `Recipe for ${prompt || "a succulent orange chicken"}:` }],
-    response_format: zodResponseFormat(RecipeSchema, 'recipeSchema'),
+    messages: [
+      {
+        role: "user",
+        content: `Recipe for ${prompt || "a succulent orange chicken"}:`,
+      },
+    ],
+    response_format: zodResponseFormat(RecipeSchema, "recipeSchema"),
   });
 
   return NextResponse.json(
-    JSON.parse(response.choices[0].message.content || '')
+    JSON.parse(response.choices[0].message.content || ""),
   );
-};
+}

@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ChevronRight, type LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { ChevronRight, type LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 
 export function NavMain({
   className,
   items,
 }: {
   items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
+    title: string;
+    url: string;
+    icon: LucideIcon;
+    isActive?: boolean;
     items?: {
-      title: string
-      url: string
-    }[]
-  }[]
+      title: string;
+      url: string;
+    }[];
+  }[];
 } & React.ComponentProps<"ul">) {
   return (
     <ul className={cn("grid gap-0.5", className)}>
@@ -68,5 +68,5 @@ export function NavMain({
         </Collapsible>
       ))}
     </ul>
-  )
+  );
 }
