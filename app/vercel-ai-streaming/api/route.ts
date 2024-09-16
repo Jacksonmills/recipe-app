@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       structuredOutputs: true,
     }),
     schema: RecipeSchema,
-    prompt: `Recipe for ${prompt || "a succulent orange chicken"}:`,
+    prompt: `Recipe for ${prompt}:`,
   });
 
   return result.toTextStreamResponse();

@@ -9,35 +9,10 @@ import { z } from "zod";
 import InputField from "@/components/form/input-field";
 import { Form } from "@/components/ui/form";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useEffect, useState } from "react";
 
 const schema = z.object({
-  prompt: z.string(),
+  prompt: z.string().min(1),
 });
-
-const useWindowSize = () => {
-  const [size, setSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  return size;
-};
 
 export default function VercelAiStreamingPage() {
   const { object, submit, isLoading } = useObject({
