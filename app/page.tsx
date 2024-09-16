@@ -1,3 +1,5 @@
+"use client";
+
 import ApplyCouponForm from "@/components/coupons/apply-coupon-form";
 import RemoveCouponForm from "@/components/coupons/remove-coupon-form";
 
@@ -11,7 +13,7 @@ export default function Home() {
           className="size-full object-cover object-left-bottom col-start-1 row-start-1"
         />
         <div className="bg-gradient-to-tl from-transparent/0 to-transparent col-start-1 row-start-1 flex items-center justify-center p-4 font-bold">
-          shadcn/ui {`<Form />`} Example with zod and react-hook-form
+          shadcn/ui {"<Form />"} Example with zod and react-hook-form
         </div>
       </div>
 

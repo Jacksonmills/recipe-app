@@ -2,10 +2,10 @@
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { RecipeSchema } from "@/lib/recipe-schema";
+import type { RecipeSchema } from "@/lib/recipe-schema";
 import { Loading } from "@/components/loading";
 import { RecipeCard } from "@/components/recipe-card";
-import { z } from "zod";
+import type { z } from "zod";
 
 export default function SynchronousPage() {
   const [prompt, setPrompt] = useState("A succulent orange chicken.");

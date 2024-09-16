@@ -5,14 +5,14 @@ import { PanelLeft } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, type buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
 
 export const SIDEBAR_STATE_COOKIE = "sidebar:state";
 
@@ -106,13 +106,13 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
           'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])',
         );
 
-        focusableElements.forEach((element) => {
+        for (const element of focusableElements) {
           if (!open) {
             (element as HTMLElement).setAttribute("tabindex", "-1");
           } else {
             (element as HTMLElement).removeAttribute("tabindex");
           }
-        });
+        }
       }
     }, [open]);
 

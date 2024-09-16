@@ -2,10 +2,10 @@
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { RecipeSchema } from "@/lib/recipe-schema";
+import type { RecipeSchema } from "@/lib/recipe-schema";
 import { Loading } from "@/components/loading";
 import { RecipeCard } from "@/components/recipe-card";
-import { z } from "zod";
+import type { z } from "zod";
 import { parse } from "partial-json";
 
 export default function StreamingPage() {

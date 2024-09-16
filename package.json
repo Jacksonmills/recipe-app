@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "biome:check": "biome check",
+    "biome:fix": "biome lint --write; biome format --write"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.58",

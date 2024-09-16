@@ -1,9 +1,9 @@
-import { z } from "zod";
+import type { z } from "zod";
 import Markdown from "react-markdown";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { RecipeSchema } from "@/lib/recipe-schema";
-import { DeepPartial } from "ai";
+import type { RecipeSchema } from "@/lib/recipe-schema";
+import type { DeepPartial } from "ai";
 
 export function RecipeCard({
   recipe,
@@ -36,11 +36,15 @@ export function RecipeCard({
           <div>
             <h3 className="text-lg font-semibold mb-2">Steps</h3>
             <ol className="list-inside space-y-2">
-              {recipe.steps.map((step, index) => (
-                <li key={`${step}-${index}`}>
-                  <Markdown>{step}</Markdown>
-                </li>
-              ))}
+              {recipe.steps.map((step, index) => {
+                const key = `${step}-${index}`;
+
+                return (
+                  <li key={key}>
+                    <Markdown>{step}</Markdown>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         )}
