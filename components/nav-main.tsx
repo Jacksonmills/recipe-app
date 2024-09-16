@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { ChevronRight, type LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
+import { ChevronRight, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 export function NavMain({
   className,

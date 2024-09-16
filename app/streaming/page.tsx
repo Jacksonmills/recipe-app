@@ -1,12 +1,12 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import type { RecipeSchema } from "@/lib/recipe-schema";
 import { Loading } from "@/components/loading";
 import { RecipeCard } from "@/components/recipe-card";
-import type { z } from "zod";
+import { Input } from "@/components/ui/input";
+import type { RecipeSchema } from "@/lib/recipe-schema";
 import { parse } from "partial-json";
+import { useState } from "react";
+import type { z } from "zod";
 
 export default function StreamingPage() {
   const [prompt, setPrompt] = useState("A succulent orange chicken.");

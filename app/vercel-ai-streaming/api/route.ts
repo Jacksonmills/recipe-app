@@ -1,6 +1,6 @@
 import { RecipeSchema } from "@/lib/recipe-schema";
-import { streamObject } from "ai";
 import { openai } from "@ai-sdk/openai";
+import { streamObject } from "ai";
 
 const modelName = "gpt-4o-2024-08-06";
 

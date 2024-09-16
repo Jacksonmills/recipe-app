@@ -1,3 +1,4 @@
+import type React from "react";
 import { useFormContext } from "react-hook-form";
 import {
   FormControl,
@@ -7,7 +8,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import type React from "react";
 
 interface InputFieldProps {
   name: string;

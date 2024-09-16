@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "bim:check": "biome check",
-    "bim:fix": "biome lint --write; biome format --write"
+    "bim:fix": "biome lint --write; biome format --write",
+    "bim:fix:unsafe": "biome check --fix --unsafe"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.58",

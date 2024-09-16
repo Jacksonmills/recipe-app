@@ -1,11 +1,11 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { experimental_useObject as useObject } from "ai/react";
-import { RecipeSchema } from "@/lib/recipe-schema";
 import { Loading } from "@/components/loading";
 import { RecipeCard } from "@/components/recipe-card";
+import { Input } from "@/components/ui/input";
+import { RecipeSchema } from "@/lib/recipe-schema";
+import { experimental_useObject as useObject } from "ai/react";
+import { useState } from "react";
 
 export default function VercelAiPage() {
   const [prompt, setPrompt] = useState("A succulent orange chicken.");

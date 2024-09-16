@@ -1,17 +1,17 @@
 "use client";
 
 import { z } from "zod";
-import InputField from "../form/input-field";
-import { applyCouponCode } from "./actions";
 import CheckboxField from "../form/checkbox-field";
-import { Card, CardFooter, CardHeader } from "../ui/card";
 import {
   FormSubmit,
   FormSubmitIdle,
   FormSubmitLoading,
   FormSubmitSuccess,
 } from "../form/form-submit";
+import InputField from "../form/input-field";
+import { Card, CardFooter, CardHeader } from "../ui/card";
 import { Form, FormGroup } from "../ui/form";
+import { applyCouponCode } from "./actions";
 
 const schema = z.object({
   code: z.string().min(4).max(8),

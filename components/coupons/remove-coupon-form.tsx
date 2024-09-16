@@ -2,14 +2,14 @@
 
 import React from "react";
 import { z } from "zod";
-import InputField from "../form/input-field";
-import { Card, CardContent, CardHeader } from "../ui/card";
 import CheckboxField from "../form/checkbox-field";
 import {
   FormSubmit,
   FormSubmitIdle,
   FormSubmitSuccess,
 } from "../form/form-submit";
+import InputField from "../form/input-field";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import { Form } from "../ui/form";
 
 const schema = z.object({

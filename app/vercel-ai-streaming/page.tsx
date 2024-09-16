@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { experimental_useObject as useObject } from "ai/react";
-import { Input } from "@/components/ui/input";
 import { RecipeCard } from "@/components/recipe-card";
+import { Input } from "@/components/ui/input";
+import { experimental_useObject as useObject } from "ai/react";
+import { useState } from "react";
 
 import { RecipeSchema } from "@/lib/recipe-schema";
 import { Loader } from "lucide-react";

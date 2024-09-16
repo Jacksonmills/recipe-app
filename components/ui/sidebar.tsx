@@ -1,10 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { PanelLeft } from "lucide-react";
+import * as React from "react";
 
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
 import { Button, type buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,6 +10,8 @@ import {
   SheetDescription,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 import type { VariantProps } from "class-variance-authority";
 
 export const SIDEBAR_STATE_COOKIE = "sidebar:state";

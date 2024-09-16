@@ -1,10 +1,10 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import type { RecipeSchema } from "@/lib/recipe-schema";
 import { Loading } from "@/components/loading";
 import { RecipeCard } from "@/components/recipe-card";
+import { Input } from "@/components/ui/input";
+import type { RecipeSchema } from "@/lib/recipe-schema";
+import { useState } from "react";
 import type { z } from "zod";
 
 export default function SynchronousPage() {
