@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "biome lint --error-on-warnings",
     "bim:check": "biome check",
     "bim:fix": "biome lint --write; biome format --write",
     "bim:fix:unsafe": "biome check --fix --unsafe"
