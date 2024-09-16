@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -12,14 +12,14 @@ export default function VercelAiPage() {
   const { object, submit, isLoading } = useObject({
     schema: RecipeSchema,
     api: "/vercel-ai/api",
-    initialValue: {name: "", ingredients: [], steps: []},
+    initialValue: { name: "", ingredients: [], steps: [] },
   });
 
   const handleSubmit = () => {
-    submit({prompt});
+    submit({ prompt });
     setPrompt("");
   };
-  
+
   return (
     <div className="flex flex-col gap-4">
       <Input
@@ -32,5 +32,5 @@ export default function VercelAiPage() {
       {isLoading && <Loading />}
       <RecipeCard recipe={object} />
     </div>
-  )
+  );
 }

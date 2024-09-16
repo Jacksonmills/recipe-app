@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { type LucideIcon } from "lucide-react"
+import Link from "next/link";
+import { type LucideIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 export function NavSecondary({
   className,
   items,
 }: {
   items: {
-    title: string
-    url: string
-    icon: LucideIcon
+    title: string;
+    url: string;
+    icon: LucideIcon;
     items?: {
-      title: string
-      url: string
-    }[]
-  }[]
+      title: string;
+      url: string;
+    }[];
+  }[];
 } & React.ComponentProps<"ul">) {
   if (!items?.length) {
-    return null
+    return null;
   }
 
   return (
@@ -39,5 +39,5 @@ export function NavSecondary({
         </li>
       ))}
     </ul>
-  )
+  );
 }

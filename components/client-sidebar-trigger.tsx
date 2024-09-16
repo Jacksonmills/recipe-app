@@ -1,15 +1,13 @@
-'use client'
+"use client";
 
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 
 export function ClientSidebarTrigger() {
-  const { open } = useSidebar()
+  const { open } = useSidebar();
 
   if (open) {
-    return null
+    return null;
   }
 
-  return (
-    <SidebarTrigger variant="secondary" />
-  )
+  return <SidebarTrigger variant="secondary" />;
 }

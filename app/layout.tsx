@@ -26,7 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { cookies } = await import("next/headers")
+  const { cookies } = await import("next/headers");
   return (
     <html lang="en">
       <body
@@ -43,9 +43,7 @@ export default async function RootLayout({
                   <ClientSidebarTrigger />
                 </div>
               </div>
-              <div className="size-full">
-                {children}
-              </div>
+              <div className="size-full">{children}</div>
             </div>
           </main>
         </SidebarLayout>

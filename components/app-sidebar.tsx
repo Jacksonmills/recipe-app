@@ -1,20 +1,15 @@
-"use client"
+"use client";
 
-import {
-  History,
-  Settings2,
-  SquareTerminal,
-  Star,
-} from "lucide-react"
+import { History, Settings2, SquareTerminal, Star } from "lucide-react";
 
-import { NavMain } from "@/components/nav-main"
+import { NavMain } from "@/components/nav-main";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarItem,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import Image from "next/image";
 const data = {
   navMain: [
@@ -51,7 +46,7 @@ const data = {
       ],
     },
   ],
-}
+};
 
 export function AppSidebar() {
   return (
@@ -75,5 +70,5 @@ export function AppSidebar() {
         </SidebarItem>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

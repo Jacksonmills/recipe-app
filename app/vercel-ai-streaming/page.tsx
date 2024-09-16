@@ -34,7 +34,7 @@ export default function VercelAiStreamingPage() {
             }}
             placeholder="What recipe do you want?"
           />
-          <div className="absolute right-2 top-1/2 -translate-y-1/2" >
+          <div className="absolute right-2 top-1/2 -translate-y-1/2">
             {isLoading && <Loader className="animate-spin-slow" />}
           </div>
         </div>

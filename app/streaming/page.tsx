@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -33,13 +33,13 @@ export default function StreamingPage() {
       const { done, value } = await reader.read();
       if (done) break;
       result += decoder.decode(value);
-      parsed = parse(result)
+      parsed = parse(result);
       setRecipe(parsed as z.infer<typeof RecipeSchema>);
     }
 
     setIsLoading(false);
   };
-  
+
   return (
     <div className="flex flex-col gap-4">
       <Input
@@ -52,5 +52,5 @@ export default function StreamingPage() {
       {isLoading && <Loading />}
       <RecipeCard recipe={recipe} />
     </div>
-  )
+  );
 }

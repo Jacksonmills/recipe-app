@@ -1,44 +1,54 @@
 import { useFormContext } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import React from "react";
+import type React from "react";
 
 interface InputFieldProps {
   name: string;
   label: string;
-  type?: React.InputHTMLAttributes<HTMLInputElement>['type'];
-  placeholder?: React.InputHTMLAttributes<HTMLInputElement>['placeholder'];
-  disabled?: React.InputHTMLAttributes<HTMLInputElement>['disabled'];
-  submit?: boolean;
+  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
+  placeholder?: React.InputHTMLAttributes<HTMLInputElement>["placeholder"];
+  disabled?: React.InputHTMLAttributes<HTMLInputElement>["disabled"];
+  submitButton?: React.ReactNode;
+  defaultValue?: string | number;
 }
 
 const InputField = ({
   name,
   label,
-  type = 'text',
+  type = "text",
   placeholder,
   disabled = false,
-  submit = false,
+  submitButton = false,
+  defaultValue = "",
 }: InputFieldProps) => {
-  const { control, formState } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <FormField
       control={control}
       name={name}
+      defaultValue={defaultValue}
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <div className="flex gap-1">
+          <div className="flex gap-2">
             <FormControl>
-              <Input type={type} placeholder={placeholder} disabled={disabled} {...field} />
+              <Input
+                type={type}
+                placeholder={placeholder}
+                disabled={disabled}
+                {...field}
+              />
             </FormControl>
-            {submit && (
-              <Button type="submit" disabled={formState.isSubmitting}>
-                Submit
-              </Button>
-            )}
+
+            {submitButton && submitButton}
           </div>
           <FormMessage />
         </FormItem>
