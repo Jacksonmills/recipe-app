@@ -1,12 +1,18 @@
 import { useFormContext } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Checkbox } from "../ui/checkbox";
-import React from "react";
+import type React from "react";
 
 interface CheckboxFieldProps {
   name: string;
   label: string;
-  disabled?: React.InputHTMLAttributes<HTMLInputElement>['disabled'];
+  disabled?: React.InputHTMLAttributes<HTMLInputElement>["disabled"];
   defaultValue?: boolean;
 }
 
@@ -28,7 +34,12 @@ const CheckboxField = ({
           <FormLabel>{label}</FormLabel>
           <div className="flex gap-2">
             <FormControl>
-              <Checkbox checked={field.value} onCheckedChange={field.onChange} disabled={disabled} {...field} />
+              <Checkbox
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                disabled={disabled}
+                {...field}
+              />
             </FormControl>
           </div>
           <FormMessage />
