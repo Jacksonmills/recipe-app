@@ -16,10 +16,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="p-2 grid gap-2 lg:grid-cols-2 grid-cols-1">
-        <ApplyCouponForm />
-        <RemoveCouponForm />
-        <NewsletterSignupForm />
+      <div className="p-2 grid gap-2 grid-cols-2 grid-rows-3">
+        <div className="row-span-1">
+          <ApplyCouponForm />
+        </div>
+        <div className="row-span-1">
+          <NewsletterSignupForm />
+        </div>
+        <div className="col-span-full row-span-2">
+          <RemoveCouponForm />
+        </div>
       </div>
     </div>
   );
