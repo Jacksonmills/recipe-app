@@ -1,6 +1,6 @@
 'use client';
 
-import { History, House, Settings2, SquareTerminal, Star } from 'lucide-react';
+import { SquareTerminal } from 'lucide-react';
 
 import { NavMain } from '@/components/nav-main';
 import {
@@ -10,7 +10,6 @@ import {
   SidebarItem,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import Image from 'next/image';
 const data = {
   navMain: [
     {
