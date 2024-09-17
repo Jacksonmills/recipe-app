@@ -7,23 +7,17 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { cn } from '@/lib/utils';
-import { ChevronRight, type LucideIcon } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import type { NavMainItem } from './app-sidebar';
+
+// test
 
 export function NavMain({
   className,
   items,
 }: {
-  items: {
-    title: string;
-    url: string;
-    icon: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+  items: NavMainItem[];
 } & React.ComponentProps<'ul'>) {
   return (
     <ul className={cn('grid gap-0.5', className)}>
@@ -35,7 +29,7 @@ export function NavMain({
                 href={item.url}
                 className="min-w-8 flex h-8 flex-1 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2"
               >
-                <item.icon className="h-4 w-4 shrink-0" />
+                <item.icon />
                 <div className="flex flex-1 overflow-hidden">
                   <div className="line-clamp-1 pr-6">{item.title}</div>
                 </div>

@@ -10,7 +10,25 @@ import {
   SidebarItem,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-const data = {
+
+export interface NavItem {
+  title: string;
+  url: string;
+}
+
+export interface NavMainItem {
+  title: string;
+  url: string;
+  icon: React.ComponentType;
+  isActive: boolean;
+  items: NavItem[];
+}
+
+export interface Data {
+  navMain: NavMainItem[];
+}
+
+const data: Data = {
   navMain: [
     {
       title: 'Navigation',
