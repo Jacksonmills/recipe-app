@@ -1,6 +1,6 @@
 'use client';
 
-import { History, Settings2, SquareTerminal, Star } from 'lucide-react';
+import { History, House, Settings2, SquareTerminal, Star } from 'lucide-react';
 
 import { NavMain } from '@/components/nav-main';
 import {
@@ -14,34 +14,38 @@ import Image from 'next/image';
 const data = {
   navMain: [
     {
-      title: 'Playground',
+      title: 'Navigation',
       url: '#',
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
+          title: 'home',
+          url: '/',
+        },
+      ],
+    },
+    {
+      title: 'Playground',
+      url: '#',
+      icon: SquareTerminal,
+      isActive: false,
+      items: [
+        {
+          title: 'vercel/ai streaming',
+          url: '/vercel-ai-streaming',
+        },
+        {
           title: 'vercel/ai',
           url: '/vercel-ai',
-          icon: History,
-          description: 'View your recent prompts',
-        },
-        {
-          title: 'vercel/ai-streaming',
-          url: '/vercel-ai-streaming',
-          icon: History,
-          description: 'View your recent prompts',
-        },
-        {
-          title: 'synchronous',
-          url: '/synchronous',
-          icon: Star,
-          description: 'Browse your starred prompts',
         },
         {
           title: 'streaming',
           url: '/streaming',
-          icon: Settings2,
-          description: 'Configure your playground',
+        },
+        {
+          title: 'synchronous',
+          url: '/synchronous',
         },
       ],
     },
@@ -54,16 +58,6 @@ export function AppSidebar() {
       <SidebarContent className="pt-0">
         <SidebarHeader>
           <SidebarTrigger className="m-2.5" />
-          <h2 className="ml-auto mr-2.5 flex items-center font-bold text-xl">
-            <Image
-              width={32}
-              height={32}
-              src="/favicon.ico"
-              alt="Vercel Logo"
-              className="w-8 h-8 mr-2.5"
-            />
-            Vercel AI
-          </h2>
         </SidebarHeader>
         <SidebarItem>
           <NavMain items={data.navMain} />

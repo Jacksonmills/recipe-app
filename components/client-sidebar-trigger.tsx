@@ -9,5 +9,5 @@ export function ClientSidebarTrigger() {
     return null;
   }
 
-  return <SidebarTrigger variant="secondary" />;
+  return <SidebarTrigger />;
 }
