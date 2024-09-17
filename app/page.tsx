@@ -1,5 +1,3 @@
-'use client';
-
 import ApplyCouponForm from '@/components/coupons/apply-coupon-form';
 import RemoveCouponForm from '@/components/coupons/remove-coupon-form';
 
