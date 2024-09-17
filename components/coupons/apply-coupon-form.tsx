@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import { z } from 'zod';
 import CheckboxField from '../form/checkbox-field';
 import {
@@ -12,7 +13,6 @@ import InputField from '../form/input-field';
 import { Card, CardFooter, CardHeader } from '../ui/card';
 import { Form, FormGroup } from '../ui/form';
 import { applyCouponCode } from './actions';
-import { toast } from 'sonner';
 
 const schema = z.object({
   code: z.string().min(4).max(8),
