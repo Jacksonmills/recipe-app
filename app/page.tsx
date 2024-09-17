@@ -1,5 +1,6 @@
 import ApplyCouponForm from '@/components/coupons/apply-coupon-form';
 import RemoveCouponForm from '@/components/coupons/remove-coupon-form';
+import NewsletterSignupForm from '@/components/newsletter-signup-form';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <div className="p-2 grid gap-2 lg:grid-cols-2 grid-cols-1">
         <ApplyCouponForm />
         <RemoveCouponForm />
+        <NewsletterSignupForm />
       </div>
     </div>
   );
