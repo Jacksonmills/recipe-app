@@ -67,7 +67,7 @@ export default function VercelAiStreamingPage() {
         <Form
           schema={schema}
           onSubmit={onSubmit}
-          reset={true}
+          resetOnSuccess
           className="grid [&>*]:col-start-1 [&>*]:row-start-1 bg-background p-4"
         >
           <div className="pt-5">

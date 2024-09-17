@@ -12,6 +12,7 @@ import InputField from '../form/input-field';
 import { Card, CardFooter, CardHeader } from '../ui/card';
 import { Form, FormGroup } from '../ui/form';
 import { applyCouponCode } from './actions';
+import { toast } from 'sonner';
 
 const schema = z.object({
   code: z.string().min(4).max(8),
@@ -22,11 +23,13 @@ const schema = z.object({
 
 const ApplyCouponForm = () => {
   const onSubmit = async (data: z.infer<typeof schema>) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     const formData = new FormData();
     formData.append('code', data.code);
     formData.append('agreement', data.agreement.toString());
-    applyCouponCode(formData);
+
+    await applyCouponCode(formData);
+
+    toast.success('Coupon applied successfully!');
   };
 
   const submitButton = (
@@ -34,7 +37,6 @@ const ApplyCouponForm = () => {
       <FormSubmit>
         <FormSubmitIdle>Apply</FormSubmitIdle>
         <FormSubmitLoading>Applying...</FormSubmitLoading>
-        <FormSubmitSuccess>Applied! ✔️</FormSubmitSuccess>
       </FormSubmit>
     </div>
   );
@@ -45,7 +47,7 @@ const ApplyCouponForm = () => {
         <h2>Apply Coupon</h2>
       </CardHeader>
       <CardFooter>
-        <Form onSubmit={onSubmit} schema={schema} reset={true}>
+        <Form onSubmit={onSubmit} schema={schema} resetOnSuccess>
           <div className="grid gap-4">
             <FormGroup
               name="apply coupon code form group"

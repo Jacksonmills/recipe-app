@@ -6,6 +6,7 @@ import CheckboxField from '../form/checkbox-field';
 import {
   FormSubmit,
   FormSubmitIdle,
+  FormSubmitLoading,
   FormSubmitSuccess,
 } from '../form/form-submit';
 import InputField from '../form/input-field';
@@ -26,7 +27,8 @@ const schema = z.object({
 });
 
 const RemoveCouponForm = () => {
-  const handleSubmit = (data: z.infer<typeof schema>) => {
+  const handleSubmit = async (data: z.infer<typeof schema>) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log('Form Data:', data);
   };
 
@@ -60,6 +62,7 @@ const RemoveCouponForm = () => {
 
           <FormSubmit>
             <FormSubmitIdle>Remove Coupon</FormSubmitIdle>
+            <FormSubmitLoading>Removing...</FormSubmitLoading>
             <FormSubmitSuccess>Removed!</FormSubmitSuccess>
           </FormSubmit>
         </Form>

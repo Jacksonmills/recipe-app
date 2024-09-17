@@ -29,39 +29,43 @@ const useFormContext = () => {
   return context;
 };
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+interface FormProps {
   schema: z.ZodObject<z.ZodRawShape>;
   onSubmit: (data: z.infer<z.ZodType>) => void | Promise<void>;
   children: React.ReactNode;
+  className?: string;
   options?: UseFormProps<z.infer<z.ZodType>>;
-  reset?: boolean;
+  resetOnSuccess?: boolean;
 }
 
 const Form = ({
   schema,
   onSubmit,
-  options,
   children,
-  reset = false,
   className,
+  options,
+  resetOnSuccess = false,
 }: FormProps) => {
   const form = useForm({
     resolver: zodResolver(schema),
     ...options,
   });
 
-  async function handleOnSubmit() {
-    await onSubmit(form.getValues());
+  const {
+    reset,
+    formState: { isSubmitSuccessful },
+  } = form;
 
-    if (reset) {
-      form.reset();
+  React.useEffect(() => {
+    if (isSubmitSuccessful && resetOnSuccess) {
+      reset();
     }
-  }
+  }, [reset, isSubmitSuccessful, resetOnSuccess]);
 
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={form.handleSubmit(handleOnSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)}
         className={cn('w-full', className)}
       >
         {children}
@@ -69,7 +73,6 @@ const Form = ({
     </FormProvider>
   );
 };
-Form.displayName = 'Form';
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,

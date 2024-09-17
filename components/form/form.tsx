@@ -7,19 +7,20 @@ import { type UseFormProps, useForm } from 'react-hook-form';
 import type { ZodRawShape, z } from 'zod';
 import { FormProvider } from '../ui/form';
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+interface FormProps {
   schema: z.ZodObject<ZodRawShape>;
   onSubmit: (data: z.infer<z.ZodType>) => void;
   children: React.ReactNode;
+  className?: string;
   options?: UseFormProps<z.infer<z.ZodType>>;
 }
 
 const Form = ({
   schema,
   onSubmit,
-  options,
   children,
   className,
+  options,
 }: FormProps) => {
   const form = useForm({
     resolver: zodResolver(schema),
