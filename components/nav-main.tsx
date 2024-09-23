@@ -11,8 +11,6 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import type { NavMainItem } from './app-sidebar';
 
-// test
-
 export function NavMain({
   className,
   items,
@@ -25,21 +23,14 @@ export function NavMain({
         <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
           <li>
             <div className="relative flex items-center">
-              <Link
-                href={item.url}
-                className="min-w-8 flex h-8 flex-1 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2"
-              >
-                <item.icon />
-                <div className="flex flex-1 overflow-hidden">
-                  <div className="line-clamp-1 pr-6">{item.title}</div>
-                </div>
-              </Link>
               <CollapsibleTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="absolute right-1 h-6 w-6 rounded-md p-0 ring-ring transition-all focus-visible:ring-2 data-[state=open]:rotate-90"
-                >
-                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <Button variant="ghost" className="group w-full p-0 pr-1.5">
+                  <div className="min-w-8 flex h-8 flex-1 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2">
+                    <div className="flex flex-1 overflow-hidden">
+                      <div className="line-clamp-1 pr-6">{item.title}</div>
+                    </div>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground transition-all focus-visible:ring-2 group-data-[state=open]:rotate-90" />
                   <span className="sr-only">Toggle</span>
                 </Button>
               </CollapsibleTrigger>
