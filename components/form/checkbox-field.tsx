@@ -2,6 +2,7 @@ import type React from 'react';
 import { Checkbox } from '../ui/checkbox';
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -42,6 +43,9 @@ const CheckboxField = ({
               />
             </FormControl>
           </div>
+          <FormDescription className="sr-only">
+            {label} checkbox field
+          </FormDescription>
           <FormMessage />
         </FormItem>
       )}

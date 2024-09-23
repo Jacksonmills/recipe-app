@@ -14,7 +14,7 @@ import { Form } from './ui/form';
 
 const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
-  agreement: z.boolean().refine((val) => val === true, {
+  'news-agreement': z.boolean().refine((val) => val === true, {
     message: 'Please read and accept the terms and conditions',
   }),
 });
@@ -31,14 +31,19 @@ const NewsletterSignupForm = () => {
         <h2>Newsletter Signup</h2>
       </CardHeader>
       <CardContent>
-        <Form schema={schema} onSubmit={handleSubmit} className="grid gap-4">
+        <Form
+          label="Newsletter Signup"
+          schema={schema}
+          onSubmit={handleSubmit}
+          className="grid gap-4"
+        >
           <InputField
             name="email"
             label="Email"
             placeholder="Enter your email address"
           />
           <CheckboxField
-            name="agreement"
+            name="news-agreement"
             label="I agree to the terms and conditions"
           />
 

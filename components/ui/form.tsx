@@ -33,6 +33,7 @@ interface FormProps {
   schema: z.ZodObject<z.ZodRawShape>;
   onSubmit: (data: z.infer<z.ZodType>) => void | Promise<void>;
   children: React.ReactNode;
+  label: string;
   className?: string;
   options?: UseFormProps<z.infer<z.ZodType>>;
   resetOnSuccess?: boolean;
@@ -42,6 +43,7 @@ const Form = ({
   schema,
   onSubmit,
   children,
+  label,
   className,
   options,
   resetOnSuccess = false,
@@ -50,6 +52,8 @@ const Form = ({
     resolver: zodResolver(schema),
     ...options,
   });
+  const id = React.useId();
+  const ariaLabelledBy = `${id}-form-description`;
 
   const {
     reset,
@@ -64,9 +68,13 @@ const Form = ({
 
   return (
     <FormProvider {...form}>
+      <h2 id={ariaLabelledBy} className="sr-only">
+        {label}
+      </h2>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn('w-full', className)}
+        aria-labelledby={ariaLabelledBy}
       >
         {children}
       </form>
@@ -231,10 +239,12 @@ FormMessage.displayName = 'FormMessage';
 
 const FormGroup = React.forwardRef<
   HTMLFieldSetElement,
-  React.FieldsetHTMLAttributes<HTMLFieldSetElement>
->(({ className, children, ...props }, ref) => {
+  React.HTMLAttributes<HTMLFieldSetElement> & {
+    label: string;
+  }
+>(({ className, children, label, ...props }, ref) => {
   return (
-    <fieldset ref={ref} className={className} {...props}>
+    <fieldset ref={ref} className={className} aria-label={label} {...props}>
       {children}
     </fieldset>
   );

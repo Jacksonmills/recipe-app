@@ -10,7 +10,7 @@ import {
 } from '../form/form-submit';
 import InputField from '../form/input-field';
 import { Card, CardContent, CardHeader } from '../ui/card';
-import { Form } from '../ui/form';
+import { Form, FormGroup } from '../ui/form';
 
 const schema = z.object({
   id: z
@@ -37,7 +37,12 @@ const RemoveCouponForm = () => {
         <h2>Remove Coupon</h2>
       </CardHeader>
       <CardContent>
-        <Form schema={schema} onSubmit={handleSubmit} className="grid gap-4">
+        <Form
+          label="Remove coupon form"
+          schema={schema}
+          onSubmit={handleSubmit}
+          className="grid gap-4"
+        >
           <InputField name="id" label="ID" />
           <InputField
             name="groupId"
@@ -45,13 +50,18 @@ const RemoveCouponForm = () => {
             disabled
             defaultValue={'remove-coupon'}
           />
-          <InputField name="testOptional" label="Test Optional" />
-          <InputField
-            name="testNullable"
-            label="Test Nullable"
-            type="number"
-            defaultValue={0}
-          />
+          <FormGroup
+            className="flex gap-2"
+            label="null and optional input group"
+          >
+            <InputField name="testOptional" label="Test Optional" />
+            <InputField
+              name="testNullable"
+              label="Test Nullable"
+              type="number"
+              defaultValue={0}
+            />
+          </FormGroup>
           <CheckboxField
             name="disabledCheckbox"
             label="Disabled Checkbox"

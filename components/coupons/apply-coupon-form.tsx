@@ -46,17 +46,23 @@ const ApplyCouponForm = () => {
         <h2>Apply Coupon</h2>
       </CardHeader>
       <CardFooter>
-        <Form onSubmit={onSubmit} schema={schema} resetOnSuccess>
+        <Form
+          label="Coupon code form"
+          onSubmit={onSubmit}
+          schema={schema}
+          resetOnSuccess
+        >
           <div className="grid gap-4">
             <FormGroup
-              name="apply coupon code form group"
               className="grid gap-4"
+              label="Coupon code and agreement group"
             >
               <InputField
                 name="code"
                 label="Coupon Code"
                 placeholder="Enter your coupon code"
                 submitButton={submitButton}
+                visuallyHideLabel
               />
               <CheckboxField
                 name="agreement"

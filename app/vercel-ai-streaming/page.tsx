@@ -65,6 +65,7 @@ export default function VercelAiStreamingPage() {
       <div className="grid place-content-end justify-stretch">
         <hr className="border-t border" />
         <Form
+          label="Prompt"
           schema={schema}
           onSubmit={onSubmit}
           resetOnSuccess

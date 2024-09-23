@@ -1,6 +1,7 @@
 import type React from 'react';
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -8,6 +9,7 @@ import {
   useFormContext,
 } from '../ui/form';
 import { Input } from '../ui/input';
+import { cn } from '@/lib/utils';
 
 interface InputFieldProps {
   name: string;
@@ -17,6 +19,7 @@ interface InputFieldProps {
   disabled?: React.InputHTMLAttributes<HTMLInputElement>['disabled'];
   submitButton?: React.ReactNode;
   defaultValue?: string | number;
+  visuallyHideLabel?: boolean;
 }
 
 const InputField = ({
@@ -25,8 +28,9 @@ const InputField = ({
   type = 'text',
   placeholder,
   disabled = false,
-  submitButton = false,
+  submitButton,
   defaultValue = '',
+  visuallyHideLabel = false,
 }: InputFieldProps) => {
   const { control } = useFormContext();
 
@@ -37,7 +41,9 @@ const InputField = ({
       defaultValue={defaultValue}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel className={cn(visuallyHideLabel && 'sr-only')}>
+            {label}
+          </FormLabel>
           <div className="flex gap-2">
             <FormControl>
               <Input
@@ -48,8 +54,11 @@ const InputField = ({
               />
             </FormControl>
 
-            {submitButton && submitButton}
+            {submitButton}
           </div>
+          <FormDescription className="sr-only">
+            {label} input field
+          </FormDescription>
           <FormMessage />
         </FormItem>
       )}
