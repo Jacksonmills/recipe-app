@@ -50,6 +50,14 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        generate: {
+          foreground: 'hsl(var(--generate-foreground))',
+          background: 'hsl(var(--generate-background))',
+          highlight: 'hsl(var(--generate-highlight))',
+          neutral: 'hsl(var(--generate-neutral))',
+          text: 'hsl(var(--generate-text))',
+          gradient: 'var(--generate-gradient)',
+        }
       },
       borderRadius: {
         lg: 'var(--radius)',

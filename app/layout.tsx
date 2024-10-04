@@ -31,7 +31,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-[family-name:var(--font-geist-mono)] antialiased dark bg-background`}
+        className={`${geistSans.variable} ${geistMono.variable} font-[family-name:var(--font-geist-mono)] antialiased  bg-background`}
       >
         <SidebarLayout
           defaultOpen={cookies().get('sidebar:state')?.value === 'true'}

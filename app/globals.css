@@ -49,6 +49,13 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    --generate-highlight: 0 0% 100%;
+    --generate-neutral: 0 0% 50%;
+    --generate-background: 0 0% 3.9%;
+    --generate-foreground: 0 0% 100%;
+    --generate-text: 0 0% 60%;
+    --generate-gradient: circle, black 50%, rgb(195, 195, 195) 100%;
   }
 
   .dark {
@@ -76,6 +83,22 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    --generate-highlight: 0 0% 100%;
+    --generate-neutral: 0 0% 75%;
+    --generate-background: 0 0% 100%;
+    --generate-foreground: 0 0% 3.9%;
+    --generate-text: 0 0% 15%;
+    --generate-gradient: circle, white 50%, rgb(114, 114, 114) 100%;
+  }
+
+  .dragonball {
+    --generate-highlight: 0 0% 100%;
+    --generate-neutral: 0 0% 75%;
+    --generate-background: 30 100% 50%;
+    --generate-foreground: 0 0% 3.9%;
+    --generate-text: 0 100% 50%;
+    --generate-gradient: circle, white 50%, rgb(114, 114, 114) 100%;
   }
 }
 

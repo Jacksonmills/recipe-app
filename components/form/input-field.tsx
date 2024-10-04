@@ -51,6 +51,7 @@ const InputField = ({
                 placeholder={placeholder}
                 disabled={disabled}
                 {...field}
+                className='rounded-full'
               />
             </FormControl>
 
