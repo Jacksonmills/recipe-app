@@ -1,51 +1,46 @@
-'use client';
-
-import { RecipeCard } from '@/components/recipe-card';
-import { experimental_useObject as useObject } from 'ai/react';
-
-import InputField from '@/components/form/input-field';
-import { Form } from '@/components/ui/form';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { RecipeSchema } from '@/lib/recipe-schema';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import { Loader, Sparkle } from 'lucide-react';
+"use client";
+import { useChat } from "ai/react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Loader, Sparkle } from "lucide-react";
 
 const schema = z.object({
   prompt: z.string().min(1),
 });
 
-export default function VercelAiStreamingPage() {
-  const { object, submit, isLoading } = useObject({
-    schema: RecipeSchema,
-    api: '/vercel-ai-streaming/api',
-  });
-
-  const onSubmit = ({
-    prompt,
-  }: {
-    prompt: z.infer<typeof schema>['prompt'];
-  }) => {
-    submit({ prompt });
-  };
+export default function VercelAiAgentsPage() {
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat({
+      api: "/vercel-ai-agents/api",
+    });
 
   return (
     <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
       <ScrollArea
         style={{
-          height: 'calc(100vh - (121px))',
+          height: "calc(100vh - (121px))",
         }}
       >
         <div className="px-4 pt-12 pb-20">
-          <RecipeCard recipe={object} />
+          {messages.map(m => (
+            <div key={m.id} className="whitespace-pre-wrap">
+              {m.role === "user" ? "User: " : "AI: "}
+              {m.role === "user" && <strong>{m.content}</strong>}
+              {m.role !== "user" && <p>{m.content}</p>}
+              {m.toolInvocations && (
+                <pre>{JSON.stringify(m.toolInvocations, null, 10)}</pre>
+              )}
+            </div>
+          ))}
         </div>
       </ScrollArea>
 
-      {!object && (
+      {!messages && (
         <div
           className="p-2 md:p-20"
           style={{
-            height: 'calc(100vh - (121px))',
+            height: "calc(100vh - (121px))",
           }}
         >
           <div className="flex items-center justify-center h-full border border-dashed flex-col text-token-text-primary">
@@ -59,43 +54,46 @@ export default function VercelAiStreamingPage() {
       <div
         className="bg-gradient-to-t to-10% from-background/75 to-transparent pointer-events-none z-20"
         style={{
-          height: 'calc(100vh - (121px))',
+          height: "calc(100vh - (121px))",
         }}
       />
 
       <div className="grid place-content-end justify-stretch">
         <hr className="border-t border" />
-        <Form
-          label="Prompt"
-          schema={schema}
-          onSubmit={onSubmit}
-          resetOnSuccess
+        <form
+          onSubmit={handleSubmit}
           className="grid [&>*]:col-start-1 [&>*]:row-start-1 bg-background p-4"
         >
+          <div className="pt-5 flex">
+            <input
+              className=""
+              value={input}
+              placeholder="Say something..."
+              onChange={handleInputChange}
+            />
+            <GenerateButton>
+              {!isLoading && (
+                <div className="grid [&>*]:col-start-1 [&>*]:row-start-1 z-20 scale-125">
+                  <Sparkle className="size-4 p-0.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
+                  <Sparkle className="size-1.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
+                  <span className="sr-only">Generate</span>
+                </div>
+              )}
+              {isLoading && (
+                <Loader className="animate-spin-slow size-4 stroke-current z-20" />
+              )}
+            </GenerateButton>
+          </div>
+        </form>
+        {/* <Form label="Prompt" schema={schema} onSubmit={handleSubmit}>
           <div className="pt-5">
             <InputField
               name="prompt"
               label="Prompt:"
               placeholder="What recipe do you want?"
-              submitButton={
-                <div className="contents">
-                  <GenerateButton>
-                    {!isLoading && (
-                      <div className="grid [&>*]:col-start-1 [&>*]:row-start-1 z-20 scale-125">
-                        <Sparkle className="size-4 p-0.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
-                        <Sparkle className="size-1.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
-                        <span className="sr-only">Generate</span>
-                      </div>
-                    )}
-                    {isLoading && (
-                      <Loader className="animate-spin-slow size-4 stroke-current z-20" />
-                    )}
-                  </GenerateButton>
-                </div>
-              }
             />
           </div>
-        </Form>
+        </Form> */}
       </div>
     </div>
   );
@@ -109,7 +107,7 @@ const GenerateButton = ({ children }: { children: React.ReactNode }) => {
       <div
         className="mt-1 w-[60%] h-6 bg-gradient-to-b from-generate-highlight to-transparent rounded-full transform mx-auto from-[-10%] to-25% z-20"
         style={{
-          borderRadius: '100% 100% 40% 40% / 45% 45% 40% 40%',
+          borderRadius: "100% 100% 40% 40% / 45% 45% 40% 40%",
         }}
       />
 
