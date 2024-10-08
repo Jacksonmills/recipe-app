@@ -40,7 +40,10 @@ export async function POST(req: Request) {
           ),
           answer: z.string(),
         }),
-        // no execute function - invoking it will terminate the agent
+        execute: async ({ steps, answer }) => ({
+          steps,
+          answer,
+        }),
       }),
     },
   });
