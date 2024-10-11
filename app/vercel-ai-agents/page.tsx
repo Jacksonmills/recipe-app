@@ -4,6 +4,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Loader, Sparkle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const schema = z.object({
   prompt: z.string().min(1),
@@ -65,7 +67,9 @@ export default function VercelAiAgentsPage() {
           className="grid [&>*]:col-start-1 [&>*]:row-start-1 bg-background p-4"
         >
           <div className="pt-5 flex">
-            <input
+            <Label htmlFor="prompt">Prompt</Label>
+            <Input
+              id="prompt"
               className=""
               value={input}
               placeholder="Say something..."

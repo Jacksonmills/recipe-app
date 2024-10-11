@@ -1,21 +1,16 @@
 "use client";
 import { useChat } from "ai/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { z } from "zod";
 import { Loader, Sparkle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { GenerateButton } from "@/components/generate-button";
 
-const schema = z.object({
-  prompt: z.string().min(1),
-});
-
-export default function VercelAiAgentsVideoPage() {
+export default function EspressoAgentPage() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
-      api: "/vercel-ai-agents-video/api",
+      api: "/espresso-agent/api",
       maxSteps: 10,
     });
 
@@ -61,21 +56,6 @@ export default function VercelAiAgentsVideoPage() {
           ))}
         </div>
       </ScrollArea>
-
-      {!messages && (
-        <div
-          className="p-2 md:p-20"
-          style={{
-            height: "calc(100vh - (121px))",
-          }}
-        >
-          <div className="flex items-center justify-center h-full border border-dashed flex-col text-token-text-primary">
-            <p className="text-lg text-gray-500 w-1/2 text-balance">
-              Enter a prompt to generate a recipe
-            </p>
-          </div>
-        </div>
-      )}
 
       <div
         className="bg-gradient-to-t to-10% from-background/75 to-transparent pointer-events-none z-20"
