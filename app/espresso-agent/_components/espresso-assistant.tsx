@@ -8,6 +8,9 @@ import { Card } from "@/components/ui/card";
 import { Loader, Sparkle } from "lucide-react";
 import { Knob } from "./knob";
 import type { EspressoShot } from "../schema";
+import Markdown from "react-markdown";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function EspressoAssistant() {
   const [formData, setFormData] = useState<EspressoShot>({
@@ -98,7 +101,8 @@ export default function EspressoAssistant() {
               ) : (
                 <div className="text-left">
                   <div className="inline-block p-4 rounded-lg">
-                    <p>{m.content}</p>
+                    <Markdown>{m.content}</Markdown>
+
                     {m.toolInvocations
                       ? m.toolInvocations.map((t, i) => {
                           if (
@@ -148,6 +152,27 @@ export default function EspressoAssistant() {
               )}
             </div>
           ))}
+
+          {!isLoading && (
+            <Card className="p-4 mt-2">
+              <h3 className="font-bold">Follow Up</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <Label htmlFor="followUpInput">Your Input</Label>
+                  <Input
+                    id="followUpInput"
+                    type="text"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    className="mt-1"
+                  />
+                </div>
+                <Button type="submit" className="w-full">
+                  Submit
+                </Button>
+              </form>
+            </Card>
+          )}
         </ScrollArea>
       </div>
       <div className="p-4 border-t">
