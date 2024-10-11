@@ -5,7 +5,7 @@ import { useChat } from "ai/react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
-import { Loader, Sparkle } from "lucide-react";
+import { IterationCw, Loader, Sparkle } from "lucide-react";
 import { Knob } from "./knob";
 import type { EspressoShot } from "../schema";
 import Markdown from "react-markdown";
@@ -49,6 +49,20 @@ export default function EspressoAssistant() {
       setElapsedTime(brewTime);
       setStep("weighing");
     }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      grindSize: 2.0,
+      grindWeight: 18.0,
+      grindTime: 15.0,
+      shotTime: 0,
+      shotWeight: 25.0,
+      notes: "",
+    });
+    setStep("setup");
+    setStartTime(null);
+    setElapsedTime(0);
   };
 
   useEffect(() => {
@@ -258,22 +272,32 @@ export default function EspressoAssistant() {
                   id="shotWeight"
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {!isLoading ? (
-                  <>
-                    Submit Results
-                    <div className="ml-2 grid [&>*]:col-start-1 [&>*]:row-start-1 z-20 scale-125">
-                      <Sparkle className="size-4 p-0.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
-                      <Sparkle className="size-1.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    Analyzing...
-                    <Loader className="ml-2 animate-spin-slow size-4 stroke-current z-20" />
-                  </>
-                )}
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  onClick={resetForm}
+                  size="icon"
+                  variant="ghost"
+                >
+                  <IterationCw />
+                </Button>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {!isLoading ? (
+                    <>
+                      Submit Results
+                      <div className="ml-2 grid [&>*]:col-start-1 [&>*]:row-start-1 z-20 scale-125">
+                        <Sparkle className="size-4 p-0.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
+                        <Sparkle className="size-1.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      Analyzing...
+                      <Loader className="ml-2 animate-spin-slow size-4 stroke-current z-20" />
+                    </>
+                  )}
+                </Button>
+              </div>
             </>
           )}
         </form>
