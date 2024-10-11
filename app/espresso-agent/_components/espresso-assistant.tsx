@@ -156,24 +156,26 @@ export default function EspressoAssistant() {
               </div>
             ))}
 
-            <Card className="p-4 mt-2">
-              <h3 className="font-bold">Follow Up</h3>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <Label htmlFor="followUpInput">Your Input</Label>
-                  <Input
-                    id="followUpInput"
-                    type="text"
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  Submit
-                </Button>
-              </form>
-            </Card>
+            {!isLoading && messages.length > 0 && (
+              <Card className="p-4 mt-2">
+                <h3 className="font-bold">Follow Up</h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <Label htmlFor="followUpInput">Your Input</Label>
+                    <Input
+                      id="followUpInput"
+                      type="text"
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      className="mt-1"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Submit
+                  </Button>
+                </form>
+              </Card>
+            )}
           </>
         </ScrollArea>
       </div>
