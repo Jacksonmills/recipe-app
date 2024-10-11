@@ -7,10 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Loader, Sparkle } from "lucide-react";
 import { Knob } from "./knob";
-import type { espressoShotSchema } from "../api/route";
-import type { z } from "zod";
-
-type EspressoShot = z.infer<typeof espressoShotSchema>;
+import type { EspressoShot } from "../schema";
 
 export default function EspressoAssistant() {
   const [formData, setFormData] = useState<EspressoShot>({

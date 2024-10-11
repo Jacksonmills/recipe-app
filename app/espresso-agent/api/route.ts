@@ -1,17 +1,9 @@
 import { openai } from "@ai-sdk/openai";
 import { convertToCoreMessages, streamText, tool } from "ai";
 import { z } from "zod";
+import { espressoShotSchema } from "../schema";
 
 const modelName = "gpt-4o-2024-08-06";
-
-export const espressoShotSchema = z.object({
-  grindSize: z.number(),
-  grindTime: z.number(),
-  grindWeight: z.number(),
-  shotTime: z.number(),
-  shotWeight: z.number(),
-  notes: z.string().optional(),
-});
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
