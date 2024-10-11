@@ -166,7 +166,7 @@ export default function EspressoAssistant() {
                   step={0.1}
                   onChange={value => handleKnobChange("grindSize", value)}
                   label="Grind Size"
-                  unit="course <--> fine"
+                  unit="crs <--> fn"
                   id="grindSize"
                 />
                 <Knob
