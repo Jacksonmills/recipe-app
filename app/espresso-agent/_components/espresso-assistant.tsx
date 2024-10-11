@@ -90,70 +90,72 @@ export default function EspressoAssistant() {
     <div className="flex flex-col h-screen bg-background">
       <div className="flex-1 overflow-hidden">
         <ScrollArea className="h-full p-4">
-          {messages.map(m => (
-            <div key={m.id} className="mb-4 whitespace-pre-wrap">
-              {m.role === "user" ? (
-                <div className="text-right">
-                  <div className="inline-block p-4 rounded-lg bg-accent text-card-foreground">
-                    <strong>{m.content}</strong>
+          <>
+            {messages.map(m => (
+              <div key={m.id} className="mb-4 whitespace-pre-wrap">
+                {m.role === "user" ? (
+                  <div className="text-right">
+                    <div className="inline-block p-4 rounded-lg bg-accent text-card-foreground">
+                      <strong>{m.content}</strong>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="text-left">
-                  <div className="inline-block p-4 rounded-lg">
-                    <Markdown>{m.content}</Markdown>
+                ) : (
+                  <div className="text-left">
+                    <div className="inline-block p-4 rounded-lg">
+                      <Markdown>{m.content}</Markdown>
 
-                    {m.toolInvocations
-                      ? m.toolInvocations.map((t, i) => {
-                          if (
-                            t.toolName === "evaluateShot" &&
-                            t.state === "result"
-                          ) {
-                            return (
-                              <Card key={t.toolCallId} className="p-4 mt-2">
-                                <h3 className="font-bold">Shot Evaluation</h3>
-                                <p>{t.result.feedback}</p>
-                              </Card>
-                            );
-                          }
-                          if (t.toolName === "answer") {
-                            return (
-                              <Card key={t.toolCallId} className="p-4 mt-2">
-                                <h3 className="font-bold">Recommendations</h3>
-                                {t.args.suggestions.map(
-                                  (
-                                    suggestion: {
-                                      setting: string;
-                                      recommendation: string;
-                                    },
-                                    index: number
-                                  ) => {
-                                    const id = useId();
+                      {m.toolInvocations
+                        ? m.toolInvocations.map((t, i) => {
+                            if (
+                              t.toolName === "evaluateShot" &&
+                              t.state === "result"
+                            ) {
+                              return (
+                                <Card key={t.toolCallId} className="p-4 mt-2">
+                                  <h3 className="font-bold">Shot Evaluation</h3>
+                                  <p>{t.result.feedback}</p>
+                                </Card>
+                              );
+                            }
+                            if (t.toolName === "answer") {
+                              return (
+                                <Card key={t.toolCallId} className="p-4 mt-2">
+                                  <h3 className="font-bold">Recommendations</h3>
+                                  {t.args.suggestions.map(
+                                    (
+                                      suggestion: {
+                                        setting: string;
+                                        recommendation: string;
+                                      },
+                                      index: number
+                                    ) => {
+                                      const id = useId();
 
-                                    return (
-                                      <p key={`${t.toolCallId}-${index}-${id}`}>
-                                        <strong>{suggestion.setting}:</strong>{" "}
-                                        {suggestion.recommendation}
-                                      </p>
-                                    );
-                                  }
-                                )}
-                                <p className="mt-2">
-                                  <strong>Final Advice:</strong>{" "}
-                                  {t.args.finalAdvice}
-                                </p>
-                              </Card>
-                            );
-                          }
-                        })
-                      : null}
+                                      return (
+                                        <p
+                                          key={`${t.toolCallId}-${index}-${id}`}
+                                        >
+                                          <strong>{suggestion.setting}:</strong>{" "}
+                                          {suggestion.recommendation}
+                                        </p>
+                                      );
+                                    }
+                                  )}
+                                  <p className="mt-2">
+                                    <strong>Final Advice:</strong>{" "}
+                                    {t.args.finalAdvice}
+                                  </p>
+                                </Card>
+                              );
+                            }
+                          })
+                        : null}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
 
-          {!isLoading && (
             <Card className="p-4 mt-2">
               <h3 className="font-bold">Follow Up</h3>
               <form onSubmit={handleSubmit}>
@@ -172,7 +174,7 @@ export default function EspressoAssistant() {
                 </Button>
               </form>
             </Card>
-          )}
+          </>
         </ScrollArea>
       </div>
       <div className="p-4 border-t">
