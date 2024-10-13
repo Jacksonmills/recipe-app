@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useRef } from "react";
@@ -105,43 +111,51 @@ export const Knob = ({
   const rotation = ((value - min) / (max - min)) * 270 - 135;
 
   return (
-    <div className="flex flex-col items-center">
-      <Label htmlFor={id} className="mb-2">
-        {label}
-      </Label>
-      <div className="relative w-20 h-20 flex items-center justify-center group">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          id={id}
-          onChange={handleInputChange}
-          className="absolute opacity-0 w-full h-full cursor-pointer z-20"
-        />
-        <div
-          className="w-20 h-20 rounded-full bg-card border-4 border-border relative group-focus-within:ring ring-offset-2"
-          style={{ transform: `rotate(${rotation}deg)` }}
-        >
-          <div className="absolute top-0 left-1/2 w-1 h-4 bg-foreground -translate-x-1/2" />
+    <Card className="flex flex-col rounded-none w-full">
+      <CardHeader>
+        <Label htmlFor={id} className="mb-4 mx-auto font-bold text-xl">
+          {label}
+        </Label>
+      </CardHeader>
+      <CardContent className="flex md:flex-col items-center gap-12 md:gap-4 justify-center">
+        <div className="relative w-20 h-20 flex items-center justify-center group">
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={value}
+            id={id}
+            onChange={handleInputChange}
+            className="absolute opacity-0 w-full h-full cursor-pointer z-20"
+          />
+          <div
+            className="w-20 h-20 rounded-full bg-card border-4 border-border relative group-focus-within:ring ring-offset-2"
+            style={{ transform: `rotate(${rotation}deg)` }}
+          >
+            <div className="absolute top-0 left-1/2 w-1 h-4 bg-foreground -translate-x-1/2" />
+          </div>
         </div>
-      </div>
-      <div className="flex items-center gap-1">
-        <Input
-          ref={inputRef}
-          type="text"
-          id={id}
-          value={value.toFixed(1)}
-          onChange={handleInputChange}
-          min={min}
-          max={max}
-          step={step}
-          className="mt-2 w-20 text-center pointer-events-none"
-        />
-        {unit && <div className="mt-1">{unit}</div>}
-      </div>
-      {helpText && <p className="text-sm text-muted-foreground">{helpText}</p>}
-    </div>
+        <CardFooter className="grid gap-2">
+          <div className="flex items-center gap-1">
+            <Input
+              ref={inputRef}
+              type="number"
+              id={id}
+              value={value.toFixed(1)}
+              onChange={handleInputChange}
+              min={min}
+              max={max}
+              step={step}
+              className="mt-2 w-20 text-center pointer-events-none md:pointer-events-auto"
+            />
+            {unit && <div className="mt-1">{unit}</div>}
+          </div>
+          {helpText && (
+            <p className="text-sm text-muted-foreground">{helpText}</p>
+          )}
+        </CardFooter>
+      </CardContent>
+    </Card>
   );
 };

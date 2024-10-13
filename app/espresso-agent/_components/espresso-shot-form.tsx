@@ -68,10 +68,13 @@ const EspressoShotForm = ({
         </div>
       </form>
       <FormDrawer>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-8 h-full max-w-3xl mx-auto w-full grid gap-6"
+        >
           <input value={input} hidden readOnly />
           {step === "setup" && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="flex justify-between gap-4 flex-col md:flex-row">
               <Knob
                 value={formData.grindSize}
                 min={0}
@@ -106,7 +109,7 @@ const EspressoShotForm = ({
           )}
           {step === "brewing" && (
             <div className="text-center">
-              <div className="text-4xl font-bold mb-4">
+              <div className="text-4xl font-bold py-14">
                 {elapsedTime.toFixed(1)}s
               </div>
             </div>
@@ -200,7 +203,9 @@ const FormDrawer = ({ children }: { children: React.ReactNode }) => {
           <Coffee size={16} /> Brew
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="p-2">{children}</DrawerContent>
+      <DrawerContent className="px-4 pb-4 rounded-none">
+        {children}
+      </DrawerContent>
     </Drawer>
   );
 };
