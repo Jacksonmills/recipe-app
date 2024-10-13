@@ -38,7 +38,7 @@ export default async function RootLayout({
         >
           <AppSidebar />
           <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-background h-dvh w-full overflow-hidden">
-            <div className="h-full grid [&>*]:col-start-1 [&>*]:row-start-1">
+            <div className="grid h-full [&>*]:col-start-1 [&>*]:row-start-1">
               <div className="p-5 z-20 pointer-events-none">
                 <div className="pointer-events-auto">
                   <ClientSidebarTrigger />
