@@ -65,9 +65,12 @@ const EspressoShotForm = ({
             value={input}
             onChange={e => setInput(e.target.value)}
             className="flex-grow"
+            disabled={isLoading}
           />
 
-          <Button type="submit">Chat</Button>
+          <Button disabled={isLoading} type="submit">
+            Chat
+          </Button>
         </div>
       </form>
       <FormDrawer>
@@ -166,22 +169,24 @@ const EspressoShotForm = ({
                 >
                   <IterationCw />
                 </Button>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {!isLoading ? (
-                    <>
-                      Submit Results
-                      <div className="ml-2 grid [&>*]:col-start-1 [&>*]:row-start-1 z-20 scale-125">
-                        <Sparkle className="size-4 p-0.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
-                        <Sparkle className="size-1.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      Analyzing...
-                      <Loader className="ml-2 animate-spin-slow size-4 stroke-current z-20" />
-                    </>
-                  )}
-                </Button>
+                <DrawerClose asChild>
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {!isLoading ? (
+                      <>
+                        Submit Results
+                        <div className="ml-2 grid [&>*]:col-start-1 [&>*]:row-start-1 z-20 scale-125">
+                          <Sparkle className="size-4 p-0.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
+                          <Sparkle className="size-1.5 fill-current stroke-current drop-shadow-[0_0px_0.5px_rgba(0,0,0,0.5)]" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        Analyzing...
+                        <Loader className="ml-2 animate-spin-slow size-4 stroke-current z-20" />
+                      </>
+                    )}
+                  </Button>
+                </DrawerClose>
               </>
             )}
             <DrawerClose asChild>
