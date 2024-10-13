@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Knob } from "./knob";
-import {
-  ChevronDown,
-  Coffee,
-  IterationCw,
-  Loader,
-  Sparkle,
-} from "lucide-react";
+import { Coffee, IterationCw, Loader, Sparkle } from "lucide-react";
 import type { EspressoShot } from "../schema";
 import {
   Drawer,
@@ -126,7 +120,7 @@ const EspressoShotForm = ({
               </div>
               <div className="flex justify-center">
                 <Knob
-                  value={formData.shotWeight || 25}
+                  value={formData.shotWeight}
                   min={25}
                   max={45}
                   step={0.1}
@@ -189,11 +183,6 @@ const EspressoShotForm = ({
                 </DrawerClose>
               </>
             )}
-            <DrawerClose asChild>
-              <Button type="button" size="icon" variant="ghost">
-                <ChevronDown />
-              </Button>
-            </DrawerClose>
           </div>
         </form>
       </FormDrawer>

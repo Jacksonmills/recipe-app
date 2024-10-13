@@ -35,6 +35,9 @@ export default function EspressoAssistant() {
       ...prev,
       [name]: value,
     }));
+
+    // Set input when knob changes
+    setInput(createInputString({ ...formData, [name]: value }));
   };
 
   const handleStartBrewing = () => {
@@ -51,6 +54,9 @@ export default function EspressoAssistant() {
       setFormData(prev => ({ ...prev, shotTime: brewTime }));
       setElapsedTime(brewTime);
       setStep("weighing");
+
+      // Set input when brewing stops
+      setInput(createInputString({ ...formData, shotTime: brewTime }));
     }
   };
 
