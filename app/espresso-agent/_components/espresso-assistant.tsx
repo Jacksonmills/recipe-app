@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect } from "react";
 import { useChat } from "ai/react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -143,12 +143,8 @@ export default function EspressoAssistant() {
                                       },
                                       index: number
                                     ) => {
-                                      const id = useId();
-
                                       return (
-                                        <p
-                                          key={`${t.toolCallId}-${index}-${id}`}
-                                        >
+                                        <p key={`${t.toolCallId}-${index}`}>
                                           <strong>{suggestion.setting}:</strong>{" "}
                                           {suggestion.recommendation}
                                         </p>
