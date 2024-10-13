@@ -32,7 +32,10 @@ export default function EspressoAgentPage() {
                   {m.toolInvocations.map((t, i) => {
                     if (t.toolName === "calculate" && t.state === "result") {
                       return (
-                        <Card key={t.toolCallId} className="p-4 mb-4">
+                        <Card
+                          key={t.toolCallId}
+                          className="p-4 mb-4 rounded-none"
+                        >
                           <h3>Calculate</h3>
                           <p className="text-2xl">
                             {t.args.expression} ={" "}
@@ -43,7 +46,10 @@ export default function EspressoAgentPage() {
                     }
                     if (t.toolName === "answer") {
                       return (
-                        <Card key={t.toolCallId} className="p-4 mb-4">
+                        <Card
+                          key={t.toolCallId}
+                          className="p-4 mb-4 rounded-none"
+                        >
                           <h3>Answer</h3>
                           <p>{t.args.answer}</p>
                         </Card>

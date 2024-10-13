@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useChat } from "ai/react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -11,6 +11,7 @@ import type { EspressoShot } from "../schema";
 import Markdown from "react-markdown";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import useAutoScroll from "../_hooks/use-auto-scroll";
 
 export default function EspressoAssistant() {
   const [formData, setFormData] = useState<EspressoShot>({
@@ -29,6 +30,9 @@ export default function EspressoAssistant() {
     api: "/espresso-agent/api",
     maxSteps: 10,
   });
+
+  const endRef = useRef<HTMLDivElement>(null);
+  useAutoScroll(endRef, [messages]);
 
   const handleKnobChange = (name: keyof EspressoShot, value: number) => {
     setFormData(prev => ({
@@ -109,52 +113,132 @@ export default function EspressoAssistant() {
               <div key={m.id} className="mb-4 whitespace-pre-wrap">
                 {m.role === "user" ? (
                   <div className="text-right">
-                    <div className="inline-block p-4 rounded-lg bg-accent text-card-foreground">
+                    <div className="inline-block p-4 bg-accent text-card-foreground">
                       <strong>{m.content}</strong>
                     </div>
                   </div>
                 ) : (
-                  <div className="text-left">
-                    <div className="inline-block p-4 rounded-lg">
-                      <Markdown>{m.content}</Markdown>
+                  <div>
+                    {m.content ? (
+                      <Markdown className="p-4">{m.content}</Markdown>
+                    ) : null}
 
+                    {m.toolInvocations
+                      ? m.toolInvocations.map((t, i) => {
+                          if (
+                            t.toolName === "evaluateShot" &&
+                            t.state === "result"
+                          ) {
+                            return (
+                              <Card
+                                key={t.toolCallId}
+                                className="p-4 mt-2 rounded-none"
+                              >
+                                <h3 className="font-bold">Shot Evaluation</h3>
+                                <p>{t.result.feedback}</p>
+                              </Card>
+                            );
+                          }
+                          if (t.toolName === "answer") {
+                            return (
+                              <Card
+                                key={t.toolCallId}
+                                className="p-4 mt-2 rounded-none"
+                              >
+                                <h3 className="font-bold">Recommendations</h3>
+                                {t.args.suggestions.map(
+                                  (
+                                    suggestion: {
+                                      setting: string;
+                                      recommendation: string;
+                                    },
+                                    index: number
+                                  ) => {
+                                    return (
+                                      <p key={`${t.toolCallId}-${index}`}>
+                                        <strong>{suggestion.setting}:</strong>{" "}
+                                        {suggestion.recommendation}
+                                      </p>
+                                    );
+                                  }
+                                )}
+                                <p className="mt-2">
+                                  <strong>Final Advice:</strong>{" "}
+                                  {t.args.finalAdvice}
+                                </p>
+                              </Card>
+                            );
+                          }
+                        })
+                      : null}
+
+                    <div className="flex flex-col md:flex-row gap-2 [&>*]:grow">
                       {m.toolInvocations
                         ? m.toolInvocations.map((t, i) => {
                             if (
-                              t.toolName === "evaluateShot" &&
+                              t.toolName === "flowRateCalculator" &&
                               t.state === "result"
                             ) {
                               return (
-                                <Card key={t.toolCallId} className="p-4 mt-2">
-                                  <h3 className="font-bold">Shot Evaluation</h3>
-                                  <p>{t.result.feedback}</p>
+                                <Card
+                                  key={t.toolCallId}
+                                  className="p-4 mt-2 rounded-none"
+                                >
+                                  <h3 className="font-bold">
+                                    Flow Rate Calculation
+                                  </h3>
+                                  <p>Flow Rate: {t.result.flowRate} g/s</p>
                                 </Card>
                               );
                             }
-                            if (t.toolName === "answer") {
+                            if (
+                              t.toolName === "extractionEfficiencyEvaluator" &&
+                              t.state === "result"
+                            ) {
                               return (
-                                <Card key={t.toolCallId} className="p-4 mt-2">
-                                  <h3 className="font-bold">Recommendations</h3>
-                                  {t.args.suggestions.map(
-                                    (
-                                      suggestion: {
-                                        setting: string;
-                                        recommendation: string;
-                                      },
-                                      index: number
-                                    ) => {
-                                      return (
-                                        <p key={`${t.toolCallId}-${index}`}>
-                                          <strong>{suggestion.setting}:</strong>{" "}
-                                          {suggestion.recommendation}
-                                        </p>
-                                      );
-                                    }
-                                  )}
-                                  <p className="mt-2">
-                                    <strong>Final Advice:</strong>{" "}
-                                    {t.args.finalAdvice}
+                                <Card
+                                  key={t.toolCallId}
+                                  className="p-4 mt-2 rounded-none"
+                                >
+                                  <h3 className="font-bold">
+                                    Extraction Efficiency
+                                  </h3>
+                                  <p>
+                                    Extraction Yield: {t.result.extractionYield}
+                                    %
                                   </p>
+                                </Card>
+                              );
+                            }
+                            if (
+                              t.toolName === "flowResistanceAnalyzer" &&
+                              t.state === "result"
+                            ) {
+                              return (
+                                <Card
+                                  key={t.toolCallId}
+                                  className="p-4 mt-2 rounded-none"
+                                >
+                                  <h3 className="font-bold">
+                                    Flow Resistance Analysis
+                                  </h3>
+                                  <p>Resistance: {t.result.resistance} g/s</p>
+                                </Card>
+                              );
+                            }
+                            if (
+                              t.toolName === "concentrationAnalyzer" &&
+                              t.state === "result"
+                            ) {
+                              return (
+                                <Card
+                                  key={t.toolCallId}
+                                  className="p-4 mt-2 rounded-none"
+                                >
+                                  <h3 className="font-bold">
+                                    Concentration Analysis
+                                  </h3>
+                                  <p>Concentration: {t.result.concentration}</p>
                                 </Card>
                               );
                             }
@@ -167,7 +251,7 @@ export default function EspressoAssistant() {
             ))}
 
             {!isLoading && messages.length > 0 && (
-              <Card className="p-4 mt-2">
+              <Card className="p-4 mt-2 rounded-none">
                 <h3 className="font-bold">Follow Up</h3>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
@@ -186,12 +270,14 @@ export default function EspressoAssistant() {
                 </form>
               </Card>
             )}
+
+            <div ref={endRef} />
           </>
         </ScrollArea>
       </div>
       <div className="p-4 border-t">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input value={input} hidden />
+          <input value={input} hidden readOnly />
           {step === "setup" && (
             <>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -209,7 +295,7 @@ export default function EspressoAssistant() {
                   value={formData.grindWeight}
                   min={14}
                   max={22}
-                  step={0.5}
+                  step={0.1}
                   onChange={value => handleKnobChange("grindWeight", value)}
                   label="Grind Weight"
                   unit="g"
@@ -219,7 +305,7 @@ export default function EspressoAssistant() {
                   value={formData.grindTime}
                   min={5}
                   max={25}
-                  step={0.5}
+                  step={0.1}
                   onChange={value => handleKnobChange("grindTime", value)}
                   label="Grind Time"
                   unit="s"
@@ -261,7 +347,7 @@ export default function EspressoAssistant() {
                   value={formData.shotWeight || 25}
                   min={25}
                   max={45}
-                  step={0.5}
+                  step={0.1}
                   onChange={value => handleKnobChange("shotWeight", value)}
                   label="Shot Weight"
                   unit="g"
