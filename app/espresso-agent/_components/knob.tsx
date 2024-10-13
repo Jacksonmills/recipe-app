@@ -100,16 +100,6 @@ export const Knob = ({
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      onChange(Math.min(max, value + step));
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      onChange(Math.max(min, value - step));
-    }
-  };
-
   const rotation = ((value - min) / (max - min)) * 270 - 135;
 
   return (
@@ -139,7 +129,7 @@ export const Knob = ({
         ref={inputRef}
         type="number"
         id={id}
-        value={value.toFixed(1)}
+        value={value}
         onChange={handleInputChange}
         min={min}
         max={max}
