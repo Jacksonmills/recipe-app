@@ -106,7 +106,7 @@ export default function EspressoAssistant() {
   };
 
   return (
-    <div className="flex flex-col bg-background relative">
+    <div className="flex flex-col h-dvh bg-background relative">
       <div className="flex-1 overflow-hidden grid [&>*]:col-start-1  [&>*]:row-start-1">
         <ScrollArea className="h-full px-4">
           <>
