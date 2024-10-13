@@ -5,17 +5,19 @@ import { Label } from "@/components/ui/label";
 import { useEffect, useRef } from "react";
 
 type KnobProps = {
+  id: string;
   value: number;
   min: number;
   max: number;
   step: number;
   onChange: (value: number) => void;
   label: string;
-  unit: string;
-  id: string;
+  unit?: string;
+  helpText?: string;
 };
 
 export const Knob = ({
+  id,
   value,
   min,
   max,
@@ -23,7 +25,7 @@ export const Knob = ({
   onChange,
   label,
   unit,
-  id,
+  helpText,
 }: KnobProps) => {
   const knobRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -125,18 +127,21 @@ export const Knob = ({
           <div className="absolute top-0 left-1/2 w-1 h-4 bg-foreground -translate-x-1/2" />
         </div>
       </div>
-      <Input
-        ref={inputRef}
-        type="number"
-        id={id}
-        value={value.toFixed(1)}
-        onChange={handleInputChange}
-        min={min}
-        max={max}
-        step={step}
-        className="mt-2 w-20 text-center"
-      />
-      <div className="mt-1 text-sm text-muted-foreground">{unit}</div>
+      <div className="flex items-center gap-1">
+        <Input
+          ref={inputRef}
+          type="text"
+          id={id}
+          value={value.toFixed(1)}
+          onChange={handleInputChange}
+          min={min}
+          max={max}
+          step={step}
+          className="mt-2 w-20 text-center pointer-events-none"
+        />
+        {unit && <div className="mt-1">{unit}</div>}
+      </div>
+      {helpText && <p className="text-sm text-muted-foreground">{helpText}</p>}
     </div>
   );
 };
