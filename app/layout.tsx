@@ -37,7 +37,7 @@ export default async function RootLayout({
           defaultOpen={cookies().get("sidebar:state")?.value === "true"}
         >
           <AppSidebar />
-          <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-background h-dvh w-full overflow-hidden">
+          <main className="flex flex-1 flex-col transition-all duration-300 ease-in-out bg-background h-screen w-full overflow-hidden">
             <div className="grid h-full [&>*]:col-start-1 [&>*]:row-start-1">
               <div className="p-5 z-20 pointer-events-none">
                 <div className="pointer-events-auto">
