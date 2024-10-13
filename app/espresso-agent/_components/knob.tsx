@@ -59,13 +59,17 @@ export const Knob = ({
       isDragging = false;
     };
 
-    const handleMouseDown = (e: MouseEvent) =>
+    const handleMouseDown = (e: MouseEvent) => {
+      e.preventDefault(); // Prevent text selection and unexpected behavior
       handleStart(e.clientX, e.clientY);
+    };
     const handleMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY);
     const handleMouseUp = () => handleEnd();
 
-    const handleTouchStart = (e: TouchEvent) =>
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault(); // Prevent scrolling while touching the knob
       handleStart(e.touches[0].clientX, e.touches[0].clientY);
+    };
     const handleTouchMove = (e: TouchEvent) =>
       handleMove(e.touches[0].clientX, e.touches[0].clientY);
     const handleTouchEnd = () => handleEnd();
@@ -122,7 +126,7 @@ export const Knob = ({
           value={value}
           id={id}
           onChange={handleInputChange}
-          className="absolute opacity-0 w-full h-full cursor-pointer"
+          className="absolute opacity-0 w-full h-full cursor-pointer z-20"
         />
         <div
           className="w-20 h-20 rounded-full bg-card border-4 border-border relative group-focus-within:ring ring-offset-2"
