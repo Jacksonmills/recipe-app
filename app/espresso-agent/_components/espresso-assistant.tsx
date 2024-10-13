@@ -8,6 +8,7 @@ import type { EspressoShot } from "../schema";
 import Markdown from "react-markdown";
 import useAutoScroll from "../_hooks/use-auto-scroll";
 import EspressoShotForm from "./espresso-shot-form";
+import { cn } from "@/lib/utils";
 
 export default function EspressoAssistant() {
   const [formData, setFormData] = useState<EspressoShot>({
@@ -105,12 +106,19 @@ export default function EspressoAssistant() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-background">
-      <div className="flex-1 overflow-hidden">
-        <ScrollArea className="h-full p-4">
+    <div className="flex flex-col h-screen bg-background relative">
+      <div className="flex-1 overflow-hidden grid [&>*]:col-start-1  [&>*]:row-start-1">
+        <ScrollArea className="h-full px-4">
           <>
-            {messages.map(m => (
-              <div key={m.id} className="mb-4 whitespace-pre-wrap">
+            {messages.map((m, idx) => (
+              <div
+                key={m.id}
+                className={cn(
+                  "mb-4 whitespace-pre-wrap",
+                  // if first message, add top margin to separate from top, else add bottom margin to separate from next message
+                  idx === 0 ? "mt-4" : ""
+                )}
+              >
                 {m.role === "user" ? (
                   <div className="text-right">
                     <div className="inline-block p-4 bg-accent text-card-foreground">
@@ -250,10 +258,13 @@ export default function EspressoAssistant() {
               </div>
             ))}
 
-            <div ref={endRef} />
+            <div ref={endRef} className="h-12" />
           </>
         </ScrollArea>
+
+        <div className="bg-gradient-to-t to-10% from-background/75 to-transparent pointer-events-none z-20 h-full" />
       </div>
+
       <EspressoShotForm
         formData={formData}
         step={step}

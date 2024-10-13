@@ -69,7 +69,8 @@ const EspressoShotForm = ({
           />
 
           <Button disabled={isLoading} type="submit" className="gap-2">
-            <MessageCircle size={16} /> Chat
+            <MessageCircle size={16} />{" "}
+            <span className="sr-only md:not-sr-only">Chat</span>
           </Button>
         </div>
       </form>
@@ -206,7 +207,8 @@ const FormDrawer = ({ children }: { children: React.ReactNode }) => {
     <Drawer>
       <DrawerTrigger asChild>
         <Button type="button" className="ml-2 gap-2">
-          <Coffee size={16} /> Brew
+          <Coffee size={16} />{" "}
+          <span className="sr-only md:not-sr-only">Brew</span>
         </Button>
       </DrawerTrigger>
       <DrawerContent className="px-4 pb-4 rounded-none">
