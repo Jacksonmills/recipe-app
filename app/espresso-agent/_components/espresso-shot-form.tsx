@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Knob } from "./knob";
-import { ChevronDown, IterationCw, Loader, Sparkle } from "lucide-react";
+import {
+  ChevronDown,
+  Coffee,
+  IterationCw,
+  Loader,
+  Sparkle,
+} from "lucide-react";
 import type { EspressoShot } from "../schema";
 import {
   Drawer,
@@ -55,13 +61,13 @@ const EspressoShotForm = ({
           <Input
             id="followUpInput"
             type="text"
-            placeholder="Say something..."
+            placeholder="Chat with the espresso agent..."
             value={input}
             onChange={e => setInput(e.target.value)}
             className="flex-grow"
           />
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Chat</Button>
         </div>
       </form>
       <FormDrawer>
@@ -196,8 +202,8 @@ const FormDrawer = ({ children }: { children: React.ReactNode }) => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button type="button" size="icon" variant="ghost">
-          <ChevronDown className="rotate-180" />
+        <Button type="button" className="ml-2 gap-2">
+          <Coffee size={16} /> Brew
         </Button>
       </DrawerTrigger>
       <DrawerContent className="p-2">{children}</DrawerContent>
