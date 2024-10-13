@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Knob } from "./knob";
-import { Coffee, IterationCw, Loader, Sparkle } from "lucide-react";
+import {
+  Coffee,
+  IterationCw,
+  Loader,
+  MessageCircle,
+  Sparkle,
+} from "lucide-react";
 import type { EspressoShot } from "../schema";
 import {
   Drawer,
@@ -62,8 +68,8 @@ const EspressoShotForm = ({
             disabled={isLoading}
           />
 
-          <Button disabled={isLoading} type="submit">
-            Chat
+          <Button disabled={isLoading} type="submit" className="gap-2">
+            <MessageCircle size={16} /> Chat
           </Button>
         </div>
       </form>
@@ -108,8 +114,8 @@ const EspressoShotForm = ({
             </div>
           )}
           {step === "brewing" && (
-            <div className="text-center">
-              <div className="text-4xl font-bold py-14">
+            <div className="content-center w-full min-h-72">
+              <div className="text-4xl font-bold mx-auto w-fit">
                 {elapsedTime.toFixed(1)}s
               </div>
             </div>
